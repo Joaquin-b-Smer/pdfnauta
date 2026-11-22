@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: pdfnauta-backend
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: "8000"
+      - key: OMP_THREAD_LIMIT
+        value: "1"
