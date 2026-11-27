@@ -1,5 +1,5 @@
 "use client";
-
+export const runtime = 'edge';
 import * as React from "react";
 import { useParams, notFound } from "next/navigation";
 import { getToolBySlug } from "@/lib/tools";
