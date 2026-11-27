@@ -5,7 +5,7 @@ export type ToolCategory =
   | "optimizar"
   | "seguridad";
 
-export type ToolExecution = "local" | "server";
+export type ToolExecution = "local";
 
 export type ToolIconName =
   | "merge"
@@ -146,14 +146,14 @@ export const PDF_TOOLS: PdfToolMeta[] = [
     title: "PDF a Word (.docx)",
     shortTitle: "PDF a Word",
     description:
-      "Conversión fiel preservando tablas, columnas, fuentes e imágenes, con OCR opcional para escaneos.",
+      "Convierte PDFs con texto o escaneados/fotos a Word editable con OCR automático y reconstrucción de tablas en tu navegador.",
     category: "convertir",
-    execution: "server",
+    execution: "local",
     icon: "pdf-word",
     accept: ".pdf,application/pdf",
-    acceptLabel: "Archivo PDF (máx. 20 MB)",
+    acceptLabel: "Archivo PDF",
     supportsPdfSmartDrop: true,
-    highlights: ["Preserva tablas e imágenes", "OCR para escaneados", "Motor Python de precisión"],
+    highlights: ["OCR automático (Español)", "Reconstruye tablas", "100% en tu dispositivo"],
   },
   {
     slug: "pdf-to-excel",
@@ -176,14 +176,14 @@ export const PDF_TOOLS: PdfToolMeta[] = [
     title: "Comprimir PDF",
     shortTitle: "Comprimir",
     description:
-      "Reduce el peso de tus PDF eligiendo entre 3 niveles (Extrema, Recomendada, Baja) con ahorro visible.",
+      "Reduce el peso de tus PDF eligiendo entre 3 niveles (Extrema, Recomendada, Baja) directamente en tu navegador.",
     category: "optimizar",
-    execution: "server",
+    execution: "local",
     icon: "compress",
     accept: ".pdf,application/pdf",
-    acceptLabel: "Archivo PDF (máx. 20 MB)",
+    acceptLabel: "Archivo PDF",
     supportsPdfSmartDrop: true,
-    highlights: ["3 niveles de compresión", "Porcentaje de ahorro", "Optimización inteligente"],
+    highlights: ["3 niveles de compresión", "Porcentaje de ahorro", "100% local y privado"],
   },
 ];
 

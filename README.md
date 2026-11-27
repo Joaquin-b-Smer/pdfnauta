@@ -1,62 +1,42 @@
 # PDFNauta by JoApps
 
-Suite web moderna, rápida y privada para gestionar y convertir documentos PDF, diseñada con arquitectura dividida lista para desplegarse gratis en **Netlify (Frontend)** y **Render (Backend)**.
+Suite web **100% client-side (PWA)** rápida, privada y gratuita para gestionar y convertir documentos PDF desde PC o celular, sin backend y lista para desplegar gratis para siempre en **Cloudflare Pages**.
 
-## Arquitectura del Monorepo
+## 10 Herramientas 100% en el Navegador
 
-- `/frontend` — **Next.js 15 (App Router) + TypeScript + Tailwind CSS**
-  - **7 herramientas 100% locales en el navegador** (`@cantoo/pdf-lib`, `pdfjs-dist`, `jszip`, `@dnd-kit`):
-    1. **Unir PDF** (miniaturas + drag-and-drop)
-    2. **Separar PDF** (rangos como `1-3, 5, 8-10` o `.zip` individual)
-    3. **Organizar y Editar Páginas** (rotar 90° izq/der, duplicar, eliminar, reordenar)
-    4. **PDF a JPG / PNG y viceversa** (exportación en `.zip` o unión de JPG/PNG/WebP con márgenes y orientación)
-    5. **Firmar PDF** (dibujar, escribir con tipografía caligráfica o subir PNG transparente, arrastrar y redimensionar)
-    6. **Marca de Agua y Numeración** (`Página X de Y`, opacidad, color, tamaño, rotación y posición con vista previa)
-    7. **Proteger y Desbloquear PDF** (cifrado y descifrado 100% en el navegador)
-  - **Smart Drop** en la portada: suelta un PDF y elige la acción al instante.
-  - **Diseño JoApps**: Modo oscuro por defecto (`#0A0A0A`, `#18181B`, acento amarillo `#FACC15`) + selector de tema claro/oscuro, aviso de Versión Gratuita de Prueba (Beta) y modal de comentarios.
+Tus archivos **nunca salen de tu dispositivo**: todo se procesa localmente usando `pdf.js`, `Tesseract.js`, `docx`, `SheetJS (xlsx)`, `@cantoo/pdf-lib` y `JSZip`.
 
-- `/backend` — **Python FastAPI + Docker** (optimizado para Render Free Tier 512 MB RAM)
-  - **3 endpoints de alta precisión**:
-    8. `POST /api/pdf-to-word` (`pdf2docx` + opción OCR con `PyMuPDF` + `Tesseract` en español/inglés)
-    9. `POST /api/word-to-pdf` (`LibreOffice Writer` headless para `.doc` y `.docx`)
-    10. `POST /api/compress-pdf` (`Ghostscript` / `PyMuPDF` con 3 niveles: Extrema, Recomendada, Baja)
-  - `GET /health` -> `{"status": "ok", ...}`
-  - Concurrencia controlada con `asyncio.Semaphore(1)`, límite de **20 MB** por archivo y borrado inmediato mediante `BackgroundTasks`.
+1. **Unir PDF** — Miniaturas en tiempo real y reordenamiento libre.
+2. **Separar PDF** — Extrae rangos específicos o divide páginas en `.zip`.
+3. **Organizar y Editar Páginas** — Rota, duplica, elimina y reordena en cuadrícula.
+4. **PDF a JPG / PNG y viceversa** — Exporta páginas a imágenes o une JPG/PNG/WebP en un PDF.
+5. **Firmar PDF** — Dibuja, escribe o sube tu firma PNG y ubícala libremente.
+6. **Marca de Agua y Numeración** — Texto personalizado, opacidad, rotación y `Página X de Y`.
+7. **Proteger y Desbloquear PDF** — Cifrado y descifrado 100% local.
+8. **PDF a Word (.docx)** — Detección automática de texto vs escaneo/foto, **OCR en español (`Tesseract.js`) a 200 DPI en escala de grises** procesado de a 1 página por vez, reconstrucción de títulos, listas y **tablas en Word**, barra de progreso real sin timeout.
+9. **PDF to Excel (.xlsx)** — Extracción de tablas con vista previa de las primeras 10 filas y descarga en `.xlsx`.
+10. **Comprimir PDF** — 3 niveles (*Extrema, Recomendada, Baja*) 100% en el navegador con ahorro visible.
 
 ---
 
 ## Desarrollo Local
 
-### 1. Backend (puerto 8000)
-```bash
-cd backend
-python -m venv .venv
-# Windows PowerShell:
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-```
-
-### 2. Frontend (puerto 3000)
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Abre `http://localhost:3000` en tu navegador. El frontend usa `NEXT_PUBLIC_API_URL` con fallback automático a `http://localhost:8000`.
+Abre `http://localhost:3000`.
 
 ---
 
-## Despliegue Gratuito
+## Despliegue en Cloudflare Pages (Gratis para siempre)
 
-### Backend en Render (Free Tier)
-1. Conecta el repositorio en Render usando el archivo `render.yaml` incluido (o crea un **Web Service** con runtime **Docker**, Root Directory `backend`, Health Check Path `/health`).
-2. Copia la URL pública generada (ej. `https://pdfnauta-backend.onrender.com`).
-
-### Frontend en Netlify
-1. Conecta el repositorio en Netlify configurando **Base directory**: `frontend`.
-2. Define la variable de entorno:
-   - `NEXT_PUBLIC_API_URL=https://pdfnauta-backend.onrender.com`
-3. Netlify detectará automáticamente `frontend/netlify.toml` y `@netlify/plugin-nextjs`.
+1. En **Cloudflare Dashboard → Workers & Pages → Create → Pages → Connect to Git**, conecta este repositorio.
+2. Configura:
+   - **Root directory:** `frontend`
+   - **Build command:** `npm run build`
+   - **Build output directory:** `out`
+   - **Node version (variable de entorno opcional):** `NODE_VERSION=20`
+3. Cloudflare Pages publicará el sitio estático completo (incluyendo PWA `manifest.json`, `sw.js`, `_headers` y todas las rutas pre-renderizadas en `out/`).

@@ -1,8 +1,8 @@
 {
   "navbar": {
     "tagline": "Suite PDF rápida, privada y sin marcas de agua",
-    "betaFull": "Versión Gratuita de Prueba (Beta)",
-    "betaShort": "Beta Gratuita",
+    "betaFull": "100% Gratis • Sin Servidores",
+    "betaShort": "100% Local",
     "switchToLight": "Cambiar a modo claro",
     "switchToDark": "Cambiar a modo oscuro",
     "themeLight": "Modo claro",
@@ -14,25 +14,25 @@
     "languageLabel": "Idioma"
   },
   "betaBanner": {
-    "title": "Versión gratuita de prueba de JoApps:",
-    "beforeLocal": "sin registro y sin marcas de agua. Las 8 herramientas locales operan",
+    "title": "PDFNauta by JoApps — 100% en tu navegador:",
+    "beforeLocal": "sin registro, sin marcas de agua y sin servidores que se duerman. Las 10 herramientas corren",
     "localHighlight": "100% en tu dispositivo",
-    "middle": "; las conversiones de servidor admiten hasta",
-    "limit": "20 MB",
-    "after": "y pueden tardar ~30-40s la primera vez si el servidor gratuito entra en reposo.",
+    "middle": "con privacidad total y",
+    "limit": "cero subida de archivos",
+    "after": "para que trabajes al instante desde PC o celular.",
     "dismissAria": "Ocultar aviso"
   },
   "hero": {
-    "pill": "Suite PDF Todo-en-Uno • JoApps",
+    "pill": "Suite PDF 100% Local • JoApps",
     "titleBefore": "Domina tus documentos",
     "titleAccent": "PDF",
     "titleAfter": "sin registros ni esperas.",
-    "subtitleBefore": "10 herramientas esenciales en un solo lugar: 8 corren",
-    "subtitleStrong": "100% en tu navegador",
-    "subtitleAfter": "para privacidad absoluta y 2 usan nuestro motor Python de alta precisión para Word y compresión avanzada.",
-    "badgeLocal": "Procesamiento local privado",
+    "subtitleBefore": "10 herramientas esenciales que corren",
+    "subtitleStrong": "100% en tu navegador y celular",
+    "subtitleAfter": "sin subir archivos a ningún servidor: convierte PDF a Word con OCR, extrae tablas a Excel, comprime, une, firma y protege al instante.",
+    "badgeLocal": "100% en tu dispositivo",
     "badgeNoWatermark": "Sin marcas de agua",
-    "badgeNoStorage": "Cero almacenamiento permanente"
+    "badgeNoStorage": "Cero subida a servidores"
   },
   "smartDrop": {
     "tag": "Smart Drop",
@@ -40,8 +40,7 @@
     "subtitle": "Detectamos PDF o imágenes y te llevamos directo a la herramienta ideal.",
     "modalTitle": "¿Qué deseas hacer con este PDF?",
     "closeAria": "Cerrar",
-    "localTag": "Local • 100% Privado",
-    "serverTag": "Servidor • Alta Precisión"
+    "localTag": "Local • 100% Privado"
   },
   "toolsSection": {
     "categoriesAria": "Filtrar herramientas por categoría",
@@ -51,7 +50,6 @@
     "emptyTitle": "No encontramos herramientas que coincidan con",
     "emptyReset": "Ver las 10 herramientas disponibles",
     "badgeLocal": "Local • 100% Privado",
-    "badgeServer": "Servidor • Alta Precisión",
     "openAction": "Abrir"
   },
   "categories": {
@@ -63,24 +61,7 @@
   },
   "toolShell": {
     "backLink": "Volver a todas las herramientas",
-    "badgeLocal": "Procesamiento local • 100% Privado",
-    "badgeServer": "Motor de Alta Precisión • Máx. 20 MB",
-    "serverNoteTitle": "Nota de la versión gratuita de prueba (JoApps):",
-    "serverNoteBefore": "Esta herramienta utiliza nuestro motor Python dedicado (límite de",
-    "serverNoteLimit": "20 MB",
-    "serverNoteAfter": ", sin marcas de agua, borrado automático tras la descarga). Si el servidor gratuito estuvo inactivo, la primera conversión puede demorar ~30-40 segundos en despertar."
-  },
-  "serverStatus": {
-    "ready": "Servidor listo para procesar",
-    "unverified": "Servidor no verificado aún",
-    "retry": "Reintentar",
-    "warming": "Preparando servidor de conversión…",
-    "stages": {
-      "connecting": "Conectando con el servidor…",
-      "processing": "Procesando archivo…",
-      "downloading": "Preparando descarga…"
-    },
-    "slowStartNote": "El servidor gratuito puede tardar ~30–40 segundos en despertar si estuvo en reposo. Mantén esta pestaña abierta; tu descarga iniciará automáticamente."
+    "badgeLocal": "Procesamiento local • 100% Privado"
   },
   "tools": {
     "unir-pdf": {
@@ -128,8 +109,8 @@
     "pdf-a-word": {
       "title": "PDF a Word (.docx)",
       "shortTitle": "PDF a Word",
-      "description": "Conversión fiel preservando tablas, columnas, fuentes e imágenes, con OCR opcional para escaneos.",
-      "highlights": ["Preserva tablas e imágenes", "OCR para escaneados", "Motor Python de precisión"]
+      "description": "Convierte PDFs con texto o escaneados/fotos a Word editable con OCR automático y tablas en tu navegador.",
+      "highlights": ["OCR automático (Español)", "Reconstruye tablas", "100% en tu dispositivo"]
     },
     "pdf-to-excel": {
       "title": "PDF to Excel",
@@ -141,20 +122,20 @@
     "comprimir-pdf": {
       "title": "Comprimir PDF",
       "shortTitle": "Comprimir",
-      "description": "Reduce el peso de tus PDF eligiendo entre 3 niveles (Extrema, Recomendada, Baja) con ahorro visible.",
-      "highlights": ["3 niveles de compresión", "Porcentaje de ahorro", "Optimización inteligente"]
+      "description": "Reduce el peso de tus PDF eligiendo entre 3 niveles (Extrema, Recomendada, Baja) directamente en tu navegador.",
+      "highlights": ["3 niveles de compresión", "Porcentaje de ahorro", "100% local y privado"]
     }
   },
   "footer": {
-    "privacyTitle": "Privacidad primero (cero almacenamiento permanente):",
-    "privacyText": "las operaciones locales nunca salen de tu navegador. En las conversiones de servidor, los archivos temporales se eliminan inmediatamente al finalizar tu descarga.",
+    "privacyTitle": "Privacidad absoluta (100% en tu dispositivo):",
+    "privacyText": "todas las herramientas se ejecutan directamente en tu navegador o celular. Tus archivos PDF nunca se suben ni se guardan en ningún servidor.",
     "feedbackButton": "Enviar comentarios o reportar error",
-    "copyrightSuffix": "— PDFNauta (Versión Gratuita de Prueba Beta).",
-    "bottomBadges": "Sin registro • Sin marcas de agua • Arquitectura segura"
+    "copyrightSuffix": "— PDFNauta (100% Local • Gratis para siempre).",
+    "bottomBadges": "Sin registro • Sin marcas de agua • Sin servidores"
   },
   "feedbackModal": {
     "title": "Comentarios o reporte de error",
-    "subtitle": "Ayúdanos a pulir PDFNauta by JoApps en esta versión Beta.",
+    "subtitle": "Ayúdanos a pulir PDFNauta by JoApps.",
     "closeAria": "Cerrar",
     "successTitle": "¡Mensaje enviado! Gracias por ayudar a mejorar PDFNauta",
     "successText": "Recibimos tus comentarios correctamente. Esta ventana se cerrará en unos segundos.",

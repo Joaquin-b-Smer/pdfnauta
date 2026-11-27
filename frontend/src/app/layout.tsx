@@ -1,13 +1,35 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { Navbar, BetaNoticeBanner } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "PDFNauta by JoApps — Suite PDF Rápida, Privada y Gratuita",
+  title: "PDFNauta by JoApps — Suite PDF 100% Local, Rápida y Gratuita",
   description:
-    "Une, separa, organiza, firma, protege, comprime y convierte archivos PDF a Word o imágenes. Procesamiento 100% local en tu navegador y motor Python de alta precisión sin registro ni marcas de agua.",
+    "Convierte PDF a Word con OCR, extrae tablas a Excel, comprime, une, separa, organiza, firma y protege PDFs 100% en tu navegador y celular sin subir archivos a ningún servidor.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "PDFNauta",
+  },
+  icons: {
+    icon: [
+      { url: "/icons/icon.svg", type: "image/svg+xml" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [{ url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" }],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0A0A0A" },
+    { media: "(prefers-color-scheme: light)", color: "#FACC15" },
+  ],
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

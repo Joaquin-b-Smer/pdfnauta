@@ -2,11 +2,10 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ArrowLeft, ShieldCheck, Server, Clock } from "lucide-react";
+import { ArrowLeft, ShieldCheck } from "lucide-react";
 import type { PdfToolMeta } from "@/lib/tools";
 import { Badge } from "@/components/ui/badge";
 import { ToolIcon } from "@/components/tool-icon";
-import { ServerWarmupStatus } from "@/components/server-status";
 import { useLanguage } from "@/context/language-context";
 
 interface ToolShellProps {
@@ -16,7 +15,6 @@ interface ToolShellProps {
 
 export function ToolShell({ tool, children }: ToolShellProps) {
   const { t } = useLanguage();
-  const isLocal = tool.execution === "local";
   const localized = t.tools[tool.slug as keyof typeof t.tools] as
     | { title?: string; description?: string; pageSubtitle?: string }
     | undefined;
@@ -36,17 +34,10 @@ export function ToolShell({ tool, children }: ToolShellProps) {
           {t.toolShell.backLink}
         </Link>
 
-        {isLocal ? (
-          <Badge variant="local" className="px-3 py-1 text-xs">
-            <ShieldCheck className="h-3.5 w-3.5" />
-            {t.toolShell.badgeLocal}
-          </Badge>
-        ) : (
-          <Badge variant="server" className="px-3 py-1 text-xs">
-            <Server className="h-3.5 w-3.5" />
-            {t.toolShell.badgeServer}
-          </Badge>
-        )}
+        <Badge variant="local" className="px-3 py-1 text-xs">
+          <ShieldCheck className="h-3.5 w-3.5" />
+          {t.toolShell.badgeLocal}
+        </Badge>
       </div>
 
       <div className="mb-8 flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 sm:flex-row sm:items-center sm:justify-between">
@@ -70,25 +61,6 @@ export function ToolShell({ tool, children }: ToolShellProps) {
           </div>
         </div>
       </div>
-
-      {!isLocal && (
-        <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-[#FACC15]/30 bg-[#FACC15]/[0.07] p-4 text-xs leading-relaxed text-foreground/90 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-start gap-3">
-            <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[#CA8A04] dark:text-[#FACC15]" />
-            <div>
-              <strong className="font-semibold text-foreground">
-                {t.toolShell.serverNoteTitle}
-              </strong>{" "}
-              {t.toolShell.serverNoteBefore}{" "}
-              <strong>{t.toolShell.serverNoteLimit}</strong>
-              {t.toolShell.serverNoteAfter}
-            </div>
-          </div>
-          <div className="shrink-0 pl-7 sm:pl-0">
-            <ServerWarmupStatus />
-          </div>
-        </div>
-      )}
 
       {children}
     </div>

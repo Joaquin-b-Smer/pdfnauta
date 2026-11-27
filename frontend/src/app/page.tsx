@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import {
   Search,
   ShieldCheck,
-  Server,
   UploadCloud,
   Sparkles,
   ArrowRight,
@@ -272,7 +271,6 @@ export default function HomePage() {
                 key={tool.slug}
                 tool={tool}
                 localLabel={t.toolsSection.badgeLocal}
-                serverLabel={t.toolsSection.badgeServer}
                 openLabel={t.toolsSection.openAction}
               />
             ))}
@@ -345,9 +343,7 @@ export default function HomePage() {
                       <ArrowRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-[#FACC15]" />
                     </div>
                     <span className="mt-0.5 block text-[11px] text-muted-foreground">
-                      {tool.execution === "local"
-                        ? t.smartDrop.localTag
-                        : t.smartDrop.serverTag}
+                      {t.smartDrop.localTag}
                     </span>
                   </div>
                 </button>
@@ -363,16 +359,12 @@ export default function HomePage() {
 function ToolCard({
   tool,
   localLabel,
-  serverLabel,
   openLabel,
 }: {
   tool: PdfToolMeta;
   localLabel: string;
-  serverLabel: string;
   openLabel: string;
 }) {
-  const isLocal = tool.execution === "local";
-
   return (
     <Link
       href={`/herramientas/${tool.slug}`}
@@ -390,17 +382,10 @@ function ToolCard({
             <ToolIcon name={tool.icon} className="h-6 w-6" />
           </div>
 
-          {isLocal ? (
-            <Badge variant="local" className="text-[11px]">
-              <ShieldCheck className="h-3 w-3" />
-              {localLabel}
-            </Badge>
-          ) : (
-            <Badge variant="server" className="text-[11px]">
-              <Server className="h-3 w-3" />
-              {serverLabel}
-            </Badge>
-          )}
+          <Badge variant="local" className="text-[11px]">
+            <ShieldCheck className="h-3 w-3" />
+            {localLabel}
+          </Badge>
         </div>
 
         <h3 className="mt-4 text-lg font-bold tracking-tight text-foreground transition-colors group-hover:text-[#CA8A04] dark:group-hover:text-[#FACC15]">

@@ -1,8 +1,8 @@
 {
   "navbar": {
     "tagline": "Fast, private, watermark-free PDF suite",
-    "betaFull": "Free Trial Version (Beta)",
-    "betaShort": "Free Beta",
+    "betaFull": "100% Free • Serverless",
+    "betaShort": "100% Local",
     "switchToLight": "Switch to light mode",
     "switchToDark": "Switch to dark mode",
     "themeLight": "Light mode",
@@ -14,25 +14,25 @@
     "languageLabel": "Language"
   },
   "betaBanner": {
-    "title": "JoApps Free Trial Version:",
-    "beforeLocal": "no sign-up and no watermarks. All 8 local tools run",
+    "title": "PDFNauta by JoApps — 100% in your browser:",
+    "beforeLocal": "no sign-up, no watermarks, and no sleeping servers. All 10 tools run",
     "localHighlight": "100% on your device",
-    "middle": "; server conversions support up to",
-    "limit": "20 MB",
-    "after": "and may take ~30-40s the first time if the free server is waking up from sleep.",
+    "middle": "with complete privacy and",
+    "limit": "zero file uploads",
+    "after": "so you can work instantly from desktop or mobile.",
     "dismissAria": "Dismiss notice"
   },
   "hero": {
-    "pill": "All-in-One PDF Suite • JoApps",
+    "pill": "100% Local PDF Suite • JoApps",
     "titleBefore": "Master your",
     "titleAccent": "PDF",
     "titleAfter": "documents with no sign-up or waiting.",
-    "subtitleBefore": "10 essential tools in one place: 8 run",
-    "subtitleStrong": "100% in your browser",
-    "subtitleAfter": "for complete privacy, and 2 use our high-precision Python engine for Word conversion and advanced compression.",
-    "badgeLocal": "Private local processing",
+    "subtitleBefore": "10 essential tools that run",
+    "subtitleStrong": "100% in your browser & phone",
+    "subtitleAfter": "without uploading files to any server: convert PDF to Word with automatic OCR, extract tables to Excel, compress, merge, sign, and protect instantly.",
+    "badgeLocal": "100% on your device",
     "badgeNoWatermark": "No watermarks",
-    "badgeNoStorage": "Zero permanent storage"
+    "badgeNoStorage": "Zero server uploads"
   },
   "smartDrop": {
     "tag": "Smart Drop",
@@ -40,8 +40,7 @@
     "subtitle": "We detect PDFs or images and take you straight to the right tool.",
     "modalTitle": "What would you like to do with this PDF?",
     "closeAria": "Close",
-    "localTag": "Local • 100% Private",
-    "serverTag": "Server • High Precision"
+    "localTag": "Local • 100% Private"
   },
   "toolsSection": {
     "categoriesAria": "Filter tools by category",
@@ -51,7 +50,6 @@
     "emptyTitle": "No tools matched",
     "emptyReset": "View all 10 available tools",
     "badgeLocal": "Local • 100% Private",
-    "badgeServer": "Server • High Precision",
     "openAction": "Open"
   },
   "categories": {
@@ -63,24 +61,7 @@
   },
   "toolShell": {
     "backLink": "Back to all tools",
-    "badgeLocal": "Local processing • 100% Private",
-    "badgeServer": "High-Precision Engine • Max. 20 MB",
-    "serverNoteTitle": "JoApps Free Trial Note:",
-    "serverNoteBefore": "This tool uses our dedicated Python engine (limit",
-    "serverNoteLimit": "20 MB",
-    "serverNoteAfter": ", no watermarks, automatic deletion right after download). If the free server was idle, the first conversion may take ~30-40 seconds to wake up."
-  },
-  "serverStatus": {
-    "ready": "Server ready to process",
-    "unverified": "Server not verified yet",
-    "retry": "Retry",
-    "warming": "Preparing conversion server…",
-    "stages": {
-      "connecting": "Connecting to server…",
-      "processing": "Processing file…",
-      "downloading": "Preparing download…"
-    },
-    "slowStartNote": "The free server may take ~30–40 seconds to wake up if it was idle. Keep this tab open; your download will start automatically."
+    "badgeLocal": "Local processing • 100% Private"
   },
   "tools": {
     "unir-pdf": {
@@ -128,8 +109,8 @@
     "pdf-a-word": {
       "title": "PDF to Word (.docx)",
       "shortTitle": "PDF to Word",
-      "description": "Accurate conversion preserving tables, columns, fonts, and images, with optional OCR for scans.",
-      "highlights": ["Preserves tables & images", "OCR for scans", "Precision Python engine"]
+      "description": "Convert text or scanned/photo PDFs to editable Word with automatic OCR and table reconstruction in your browser.",
+      "highlights": ["Auto OCR (Spanish)", "Reconstructs tables", "100% on your device"]
     },
     "pdf-to-excel": {
       "title": "PDF to Excel",
@@ -141,20 +122,20 @@
     "comprimir-pdf": {
       "title": "Compress PDF",
       "shortTitle": "Compress",
-      "description": "Reduce PDF file size choosing from 3 compression levels (Extreme, Recommended, Low) with visible savings.",
-      "highlights": ["3 compression levels", "Savings percentage", "Smart optimization"]
+      "description": "Reduce PDF file size choosing from 3 compression levels (Extreme, Recommended, Low) directly in your browser.",
+      "highlights": ["3 compression levels", "Savings percentage", "100% local & private"]
     }
   },
   "footer": {
-    "privacyTitle": "Privacy first (zero permanent storage):",
-    "privacyText": "local operations never leave your browser. For server conversions, temporary files are deleted immediately after your download completes.",
+    "privacyTitle": "Complete privacy (100% on your device):",
+    "privacyText": "every tool runs directly inside your browser or phone. Your PDF files are never uploaded or stored on any server.",
     "feedbackButton": "Send feedback or report a bug",
-    "copyrightSuffix": "— PDFNauta (Free Trial Beta).",
-    "bottomBadges": "No sign-up • No watermarks • Secure architecture"
+    "copyrightSuffix": "— PDFNauta (100% Local • Free forever).",
+    "bottomBadges": "No sign-up • No watermarks • Serverless"
   },
   "feedbackModal": {
     "title": "Feedback or bug report",
-    "subtitle": "Help us improve PDFNauta by JoApps during this Beta.",
+    "subtitle": "Help us improve PDFNauta by JoApps.",
     "closeAria": "Close",
     "successTitle": "Message sent! Thanks for helping improve PDFNauta",
     "successText": "We received your feedback. This window will close in a few seconds.",
