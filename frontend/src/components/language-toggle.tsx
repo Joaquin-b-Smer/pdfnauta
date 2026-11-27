@@ -21,7 +21,7 @@ export function LanguageToggle({ className }: LanguageToggleProps) {
       role="group"
       aria-label={t.navbar.languageAria}
       className={cn(
-        "inline-flex items-center gap-0.5 rounded-full border border-black/[0.08] bg-black/[0.05] p-0.5 font-sans backdrop-blur-sm dark:border-white/[0.08] dark:bg-white/[0.06]",
+        "inline-flex items-center gap-0.5 rounded-full border border-border/70 bg-secondary/70 p-0.5 font-sans backdrop-blur-sm dark:border-white/[0.08] dark:bg-white/[0.06]",
         className
       )}
     >
@@ -34,10 +34,10 @@ export function LanguageToggle({ className }: LanguageToggleProps) {
             onClick={() => setLanguage(item.code)}
             aria-pressed={active}
             className={cn(
-              "rounded-full px-2.5 py-1 text-[13px] leading-none tracking-wide transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15]",
+              "rounded-full px-2.5 py-1 text-[13px] leading-none tracking-wide transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
               active
-                ? "bg-[#FDE68A] font-bold text-[#0A0A0A] shadow-sm"
-                : "bg-transparent font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+                ? "bg-primary font-bold text-primary-foreground shadow-sm"
+                : "bg-transparent font-medium text-muted-foreground hover:text-foreground"
             )}
           >
             {item.label}
