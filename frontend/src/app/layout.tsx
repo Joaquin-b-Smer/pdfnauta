@@ -24,6 +24,20 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Caveat:wght@600;700&display=swap"
           rel="stylesheet"
         />
+        <style>{`
+          :root {
+            --font-sans: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+            --font-display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+            --font-jakarta-sans: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+            --font-inter: "Inter", "Plus Jakarta Sans", system-ui, sans-serif;
+            --font-dancing-script: "Dancing Script", cursive;
+            --font-great-vibes: "Great Vibes", cursive;
+            --font-caveat: "Caveat", cursive;
+          }
+          body {
+            font-family: "Plus Jakarta Sans", "Inter", system-ui, sans-serif !important;
+          }
+        `}</style>
       </head>
       <body className="min-h-screen font-sans">
         <Providers>
