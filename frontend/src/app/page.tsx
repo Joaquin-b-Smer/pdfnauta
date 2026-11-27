@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { PDF_TOOLS, TOOL_CATEGORIES, type ToolCategory, type PdfToolMeta } from "@/lib/tools";
 import { usePendingFile } from "@/context/pending-file-context";
+import { useLanguage } from "@/context/language-context";
 import { formatBytes } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/card";
@@ -25,6 +26,7 @@ import { ToolIcon } from "@/components/tool-icon";
 export default function HomePage() {
   const router = useRouter();
   const { setPendingFile } = usePendingFile();
+  const { t } = useLanguage();
 
   const [search, setSearch] = React.useState("");
   const [category, setCategory] = React.useState<ToolCategory>("todas");
@@ -32,9 +34,23 @@ export default function HomePage() {
   const [smartDropFile, setSmartDropFile] = React.useState<File | null>(null);
   const smartInputRef = React.useRef<HTMLInputElement>(null);
 
+  const getLocalizedTool = React.useCallback(
+    (tool: PdfToolMeta) => {
+      const entry = t.tools[tool.slug as keyof typeof t.tools];
+      return {
+        ...tool,
+        title: entry?.title ?? tool.title,
+        shortTitle: entry?.shortTitle ?? tool.shortTitle,
+        description: entry?.description ?? tool.description,
+        highlights: entry?.highlights ?? tool.highlights,
+      };
+    },
+    [t]
+  );
+
   const filteredTools = React.useMemo(() => {
     const q = search.trim().toLowerCase();
-    return PDF_TOOLS.filter((tool) => {
+    return PDF_TOOLS.map(getLocalizedTool).filter((tool) => {
       const matchesCat = category === "todas" || tool.category === category;
       if (!matchesCat) return false;
       if (!q) return true;
@@ -44,7 +60,7 @@ export default function HomePage() {
         tool.highlights.some((h) => h.toLowerCase().includes(q))
       );
     });
-  }, [search, category]);
+  }, [search, category, getLocalizedTool]);
 
   const handleSmartFile = (file: File | undefined) => {
     if (!file) return;
@@ -68,8 +84,8 @@ export default function HomePage() {
   };
 
   const smartDropTools = React.useMemo(
-    () => PDF_TOOLS.filter((t) => t.supportsPdfSmartDrop),
-    []
+    () => PDF_TOOLS.filter((tool) => tool.supportsPdfSmartDrop).map(getLocalizedTool),
+    [getLocalizedTool]
   );
 
   return (
@@ -98,34 +114,35 @@ export default function HomePage() {
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#FACC15]/35 bg-[#FACC15]/10 px-3.5 py-1 text-xs font-semibold text-[#A16207] dark:text-[#FACC15]">
                 <Sparkles className="h-3.5 w-3.5" />
-                Suite PDF Todo-en-Uno • JoApps
+                {t.hero.pill}
               </div>
 
               <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-foreground sm:text-5xl sm:leading-[1.1]">
-                Domina tus documentos{" "}
-                <span className="text-[#EAB308] dark:text-[#FACC15]">PDF</span> sin
-                registros ni esperas.
+                {t.hero.titleBefore}{" "}
+                <span className="text-[#EAB308] dark:text-[#FACC15]">
+                  {t.hero.titleAccent}
+                </span>{" "}
+                {t.hero.titleAfter}
               </h1>
 
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-                10 herramientas esenciales en un solo lugar: 8 corren{" "}
-                <strong className="text-foreground">100% en tu navegador</strong> para
-                privacidad absoluta y 2 usan nuestro motor Python de alta precisión para
-                Word y compresión avanzada.
+                {t.hero.subtitleBefore}{" "}
+                <strong className="text-foreground">{t.hero.subtitleStrong}</strong>{" "}
+                {t.hero.subtitleAfter}
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3 text-xs font-medium text-muted-foreground">
                 <span className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-card/80 px-3 py-1.5">
                   <ShieldCheck className="h-4 w-4 text-emerald-500" />
-                  Procesamiento local privado
+                  {t.hero.badgeLocal}
                 </span>
                 <span className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-card/80 px-3 py-1.5">
                   <Zap className="h-4 w-4 text-[#FACC15]" />
-                  Sin marcas de agua
+                  {t.hero.badgeNoWatermark}
                 </span>
                 <span className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-card/80 px-3 py-1.5">
                   <Lock className="h-4 w-4 text-[#FACC15]" />
-                  Cero almacenamiento permanente
+                  {t.hero.badgeNoStorage}
                 </span>
               </div>
             </div>
@@ -164,13 +181,13 @@ export default function HomePage() {
                 </div>
 
                 <span className="mt-3 rounded-full bg-secondary px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
-                  Smart Drop
+                  {t.smartDrop.tag}
                 </span>
                 <h2 className="mt-2 text-base font-bold text-foreground sm:text-lg">
-                  Suelta un PDF aquí y elige qué hacer
+                  {t.smartDrop.title}
                 </h2>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Detectamos PDF o imágenes y te llevamos directo a la herramienta ideal.
+                  {t.smartDrop.subtitle}
                 </p>
               </div>
             </div>
@@ -185,7 +202,7 @@ export default function HomePage() {
           <div
             className="flex flex-wrap items-center gap-2"
             role="tablist"
-            aria-label="Filtrar herramientas por categoría"
+            aria-label={t.toolsSection.categoriesAria}
           >
             {TOOL_CATEGORIES.map((cat) => {
               const active = category === cat.id;
@@ -202,7 +219,7 @@ export default function HomePage() {
                       : "border border-border bg-card text-muted-foreground hover:border-[#FACC15]/50 hover:text-foreground"
                   }`}
                 >
-                  {cat.label}
+                  {t.categories[cat.id]}
                 </button>
               );
             })}
@@ -214,15 +231,15 @@ export default function HomePage() {
             <Input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Buscar herramienta (ej. firmar, word, ocr...)"
+              placeholder={t.toolsSection.searchPlaceholder}
               className="pl-10 pr-9"
-              aria-label="Buscar herramienta"
+              aria-label={t.toolsSection.searchAria}
             />
             {search && (
               <button
                 type="button"
                 onClick={() => setSearch("")}
-                aria-label="Limpiar búsqueda"
+                aria-label={t.toolsSection.clearSearchAria}
                 className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-muted-foreground hover:text-foreground"
               >
                 <X className="h-3.5 w-3.5" />
@@ -235,7 +252,7 @@ export default function HomePage() {
         {filteredTools.length === 0 ? (
           <div className="mt-10 rounded-2xl border border-dashed border-border bg-card/50 p-12 text-center">
             <p className="text-base font-semibold text-foreground">
-              No encontramos herramientas que coincidan con &ldquo;{search}&rdquo;.
+              {t.toolsSection.emptyTitle} &ldquo;{search}&rdquo;.
             </p>
             <button
               type="button"
@@ -245,13 +262,19 @@ export default function HomePage() {
               }}
               className="mt-3 text-sm font-semibold text-[#EAB308] underline-offset-4 hover:underline dark:text-[#FACC15]"
             >
-              Ver las 10 herramientas disponibles
+              {t.toolsSection.emptyReset}
             </button>
           </div>
         ) : (
           <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filteredTools.map((tool) => (
-              <ToolCard key={tool.slug} tool={tool} />
+              <ToolCard
+                key={tool.slug}
+                tool={tool}
+                localLabel={t.toolsSection.badgeLocal}
+                serverLabel={t.toolsSection.badgeServer}
+                openLabel={t.toolsSection.openAction}
+              />
             ))}
           </div>
         )}
@@ -277,7 +300,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h2 id="smart-drop-title" className="text-lg font-extrabold text-foreground">
-                    ¿Qué deseas hacer con este PDF?
+                    {t.smartDrop.modalTitle}
                   </h2>
                   <p className="mt-0.5 text-xs text-muted-foreground">
                     <span className="font-semibold text-foreground">
@@ -290,7 +313,7 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => setSmartDropFile(null)}
-                aria-label="Cerrar"
+                aria-label={t.smartDrop.closeAria}
                 className="rounded-lg p-1.5 text-muted-foreground hover:bg-secondary hover:text-foreground"
               >
                 <X className="h-4 w-4" />
@@ -323,8 +346,8 @@ export default function HomePage() {
                     </div>
                     <span className="mt-0.5 block text-[11px] text-muted-foreground">
                       {tool.execution === "local"
-                        ? "Local • 100% Privado"
-                        : "Servidor • Alta Precisión"}
+                        ? t.smartDrop.localTag
+                        : t.smartDrop.serverTag}
                     </span>
                   </div>
                 </button>
@@ -337,7 +360,17 @@ export default function HomePage() {
   );
 }
 
-function ToolCard({ tool }: { tool: PdfToolMeta }) {
+function ToolCard({
+  tool,
+  localLabel,
+  serverLabel,
+  openLabel,
+}: {
+  tool: PdfToolMeta;
+  localLabel: string;
+  serverLabel: string;
+  openLabel: string;
+}) {
   const isLocal = tool.execution === "local";
 
   return (
@@ -360,12 +393,12 @@ function ToolCard({ tool }: { tool: PdfToolMeta }) {
           {isLocal ? (
             <Badge variant="local" className="text-[11px]">
               <ShieldCheck className="h-3 w-3" />
-              Local • 100% Privado
+              {localLabel}
             </Badge>
           ) : (
             <Badge variant="server" className="text-[11px]">
               <Server className="h-3 w-3" />
-              Servidor • Alta Precisión
+              {serverLabel}
             </Badge>
           )}
         </div>
@@ -391,7 +424,7 @@ function ToolCard({ tool }: { tool: PdfToolMeta }) {
         </div>
 
         <span className="inline-flex items-center gap-1 text-xs font-bold text-[#CA8A04] dark:text-[#FACC15]">
-          Abrir
+          {openLabel}
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
         </span>
       </div>

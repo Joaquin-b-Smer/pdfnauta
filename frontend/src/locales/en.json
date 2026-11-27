@@ -1,0 +1,178 @@
+{
+  "navbar": {
+    "tagline": "Fast, private, watermark-free PDF suite",
+    "betaFull": "Free Trial Version (Beta)",
+    "betaShort": "Free Beta",
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode",
+    "themeLight": "Light mode",
+    "themeDark": "Dark mode",
+    "languageAria": "Select language",
+    "menuAria": "Open menu",
+    "closeMenuAria": "Close menu",
+    "allToolsLink": "All tools",
+    "languageLabel": "Language"
+  },
+  "betaBanner": {
+    "title": "JoApps Free Trial Version:",
+    "beforeLocal": "no sign-up and no watermarks. All 8 local tools run",
+    "localHighlight": "100% on your device",
+    "middle": "; server conversions support up to",
+    "limit": "20 MB",
+    "after": "and may take ~30-40s the first time if the free server is waking up from sleep.",
+    "dismissAria": "Dismiss notice"
+  },
+  "hero": {
+    "pill": "All-in-One PDF Suite • JoApps",
+    "titleBefore": "Master your",
+    "titleAccent": "PDF",
+    "titleAfter": "documents with no sign-up or waiting.",
+    "subtitleBefore": "10 essential tools in one place: 8 run",
+    "subtitleStrong": "100% in your browser",
+    "subtitleAfter": "for complete privacy, and 2 use our high-precision Python engine for Word conversion and advanced compression.",
+    "badgeLocal": "Private local processing",
+    "badgeNoWatermark": "No watermarks",
+    "badgeNoStorage": "Zero permanent storage"
+  },
+  "smartDrop": {
+    "tag": "Smart Drop",
+    "title": "Drop a PDF here and choose what to do",
+    "subtitle": "We detect PDFs or images and take you straight to the right tool.",
+    "modalTitle": "What would you like to do with this PDF?",
+    "closeAria": "Close",
+    "localTag": "Local • 100% Private",
+    "serverTag": "Server • High Precision"
+  },
+  "toolsSection": {
+    "categoriesAria": "Filter tools by category",
+    "searchPlaceholder": "Search tools (e.g. sign, excel, word...)",
+    "searchAria": "Search tools",
+    "clearSearchAria": "Clear search",
+    "emptyTitle": "No tools matched",
+    "emptyReset": "View all 10 available tools",
+    "badgeLocal": "Local • 100% Private",
+    "badgeServer": "Server • High Precision",
+    "openAction": "Open"
+  },
+  "categories": {
+    "todas": "All",
+    "convertir": "Convert",
+    "organizar": "Organize",
+    "optimizar": "Optimize",
+    "seguridad": "Security"
+  },
+  "toolShell": {
+    "backLink": "Back to all tools",
+    "badgeLocal": "Local processing • 100% Private",
+    "badgeServer": "High-Precision Engine • Max. 20 MB",
+    "serverNoteTitle": "JoApps Free Trial Note:",
+    "serverNoteBefore": "This tool uses our dedicated Python engine (limit",
+    "serverNoteLimit": "20 MB",
+    "serverNoteAfter": ", no watermarks, automatic deletion right after download). If the free server was idle, the first conversion may take ~30-40 seconds to wake up."
+  },
+  "serverStatus": {
+    "ready": "Server ready to process",
+    "unverified": "Server not verified yet",
+    "retry": "Retry",
+    "warming": "Preparing conversion server…",
+    "stages": {
+      "connecting": "Connecting to server…",
+      "processing": "Processing file…",
+      "downloading": "Preparing download…"
+    },
+    "slowStartNote": "The free server may take ~30–40 seconds to wake up if it was idle. Keep this tab open; your download will start automatically."
+  },
+  "tools": {
+    "unir-pdf": {
+      "title": "Merge PDF",
+      "shortTitle": "Merge",
+      "description": "Combine multiple PDF files into a single document with cover thumbnails and free drag-and-drop reordering.",
+      "highlights": ["Live thumbnails", "Drag and drop", "No file uploads"]
+    },
+    "separar-pdf": {
+      "title": "Split PDF",
+      "shortTitle": "Split",
+      "description": "Extract specific page ranges (e.g. 1-3, 5, 8-10) or split every page into individual files in a .zip.",
+      "highlights": ["Custom ranges", "Download as .zip", "Instant"]
+    },
+    "organizar-paginas": {
+      "title": "Organize & Edit Pages",
+      "shortTitle": "Organize",
+      "description": "View every page in a grid to rotate 90°, delete, duplicate, or reorder pages freely.",
+      "highlights": ["Per-page rotation", "Duplicate & delete", "Drag-and-drop reorder"]
+    },
+    "pdf-imagenes": {
+      "title": "PDF to JPG / PNG & Vice Versa",
+      "shortTitle": "PDF ↔ Images",
+      "description": "Export PDF pages as crisp images (.zip) or merge JPG, PNG, and WebP images into one PDF.",
+      "highlights": ["High resolution", "Margins & orientation", "JPG, PNG & WebP"]
+    },
+    "firmar-pdf": {
+      "title": "Sign PDF",
+      "shortTitle": "Sign",
+      "description": "Draw your signature, type it in calligraphy, or upload a transparent PNG and place it anywhere.",
+      "highlights": ["Draw, type, or upload", "Visual resizing", "Multiple pages"]
+    },
+    "marca-agua-numeracion": {
+      "title": "Watermark & Page Numbers",
+      "shortTitle": "Watermark & Numbers",
+      "description": "Add custom text watermarks or page numbering (Page X of Y) adjusting opacity, color, size, and position.",
+      "highlights": ["Live preview", "Page X of Y", "Opacity & position control"]
+    },
+    "proteger-desbloquear": {
+      "title": "Protect & Unlock PDF",
+      "shortTitle": "Protect / Unlock",
+      "description": "Encrypt your PDFs with a password or remove the password from your own protected documents.",
+      "highlights": ["In-browser encryption", "Remove own password", "Never sent to servers"]
+    },
+    "pdf-a-word": {
+      "title": "PDF to Word (.docx)",
+      "shortTitle": "PDF to Word",
+      "description": "Accurate conversion preserving tables, columns, fonts, and images, with optional OCR for scans.",
+      "highlights": ["Preserves tables & images", "OCR for scans", "Precision Python engine"]
+    },
+    "pdf-to-excel": {
+      "title": "PDF to Excel",
+      "shortTitle": "PDF to Excel",
+      "description": "Extract tables from your PDF and download them as an editable Excel spreadsheet",
+      "pageSubtitle": "Upload your PDF with tables and download it in Excel ready to edit. 100% free and no sign-up.",
+      "highlights": ["Table preview", ".xlsx export", "100% in your browser"]
+    },
+    "comprimir-pdf": {
+      "title": "Compress PDF",
+      "shortTitle": "Compress",
+      "description": "Reduce PDF file size choosing from 3 compression levels (Extreme, Recommended, Low) with visible savings.",
+      "highlights": ["3 compression levels", "Savings percentage", "Smart optimization"]
+    }
+  },
+  "footer": {
+    "privacyTitle": "Privacy first (zero permanent storage):",
+    "privacyText": "local operations never leave your browser. For server conversions, temporary files are deleted immediately after your download completes.",
+    "feedbackButton": "Send feedback or report a bug",
+    "copyrightSuffix": "— PDFNauta (Free Trial Beta).",
+    "bottomBadges": "No sign-up • No watermarks • Secure architecture"
+  },
+  "feedbackModal": {
+    "title": "Feedback or bug report",
+    "subtitle": "Help us improve PDFNauta by JoApps during this Beta.",
+    "closeAria": "Close",
+    "successTitle": "Message sent! Thanks for helping improve PDFNauta",
+    "successText": "We received your feedback. This window will close in a few seconds.",
+    "closeButton": "Close",
+    "categoryBug": "Report bug",
+    "categorySuggestion": "Suggestion",
+    "categoryOther": "Other",
+    "toolLabel": "Related tool",
+    "toolGeneral": "General / Home",
+    "emailLabel": "Email (optional)",
+    "emailPlaceholder": "you@email.com",
+    "messageLabel": "Message *",
+    "messagePlaceholder": "Describe the issue, browser used, or your idea for improvement...",
+    "errorTooShort": "Please tell us briefly what happened or what you'd like to improve.",
+    "errorServer": "We couldn't send your message right now. Please try again or email us directly.",
+    "errorNetwork": "We couldn't send the message due to a connection issue. Please try again or email us directly.",
+    "cancel": "Cancel",
+    "sending": "Sending...",
+    "submit": "Send message"
+  }
+}

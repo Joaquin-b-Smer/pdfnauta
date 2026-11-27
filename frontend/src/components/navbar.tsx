@@ -3,13 +3,17 @@
 import * as React from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { Moon, Sun, Compass, Sparkles, Info, X } from "lucide-react";
+import { Moon, Sun, Compass, Sparkles, Info, X, Menu } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { LanguageToggle } from "@/components/language-toggle";
+import { useLanguage } from "@/context/language-context";
 
 export function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();
+  const { t } = useLanguage();
   const [mounted, setMounted] = React.useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   React.useEffect(() => setMounted(true), []);
 
@@ -18,8 +22,12 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/80 bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="group flex items-center gap-3 focus:outline-none">
-          <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-[#FACC15] text-[#0A0A0A] shadow-md shadow-[#FACC15]/20 transition-transform duration-200 group-hover:scale-105">
+        <Link
+          href="/"
+          onClick={() => setMobileMenuOpen(false)}
+          className="group flex items-center gap-3 focus:outline-none"
+        >
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FACC15] text-[#0A0A0A] shadow-md shadow-[#FACC15]/20 transition-transform duration-200 group-hover:scale-105">
             <Compass className="h-5 w-5 stroke-[2.4]" />
           </div>
           <div className="flex flex-col leading-none">
@@ -32,27 +40,27 @@ export function Navbar() {
               </span>
             </div>
             <span className="mt-0.5 hidden text-[11px] text-muted-foreground sm:inline">
-              Suite PDF rápida, privada y sin marcas de agua
+              {t.navbar.tagline}
             </span>
           </div>
         </Link>
 
-        <div className="flex items-center gap-2 sm:gap-3">
-          <Badge variant="beta" className="py-1 text-[11px] sm:text-xs">
+        {/* Desktop right controls: Beta badge -> ES | EN pill -> Theme action */}
+        <div className="hidden items-center gap-3 md:flex">
+          <Badge variant="beta" className="py-1 text-xs">
             <Sparkles className="h-3.5 w-3.5 shrink-0" />
-            <span className="hidden xs:inline sm:inline">
-              Versión Gratuita de Prueba (Beta)
-            </span>
-            <span className="sm:hidden">Beta Gratuita</span>
+            <span>{t.navbar.betaFull}</span>
           </Badge>
+
+          <LanguageToggle />
 
           <Button
             type="button"
             variant="outline"
             size="icon"
             onClick={() => setTheme(isDark ? "light" : "dark")}
-            aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-            title={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+            aria-label={isDark ? t.navbar.switchToLight : t.navbar.switchToDark}
+            title={isDark ? t.navbar.switchToLight : t.navbar.switchToDark}
             className="rounded-xl border-border/90"
           >
             {isDark ? (
@@ -62,12 +70,81 @@ export function Navbar() {
             )}
           </Button>
         </div>
+
+        {/* Mobile right controls: compact menu button */}
+        <div className="flex items-center gap-2 md:hidden">
+          <Badge variant="beta" className="py-1 text-[11px]">
+            <Sparkles className="h-3 w-3 shrink-0" />
+            <span>{t.navbar.betaShort}</span>
+          </Badge>
+
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            onClick={() => setMobileMenuOpen((v) => !v)}
+            aria-expanded={mobileMenuOpen}
+            aria-label={mobileMenuOpen ? t.navbar.closeMenuAria : t.navbar.menuAria}
+            className="rounded-xl border-border/90"
+          >
+            {mobileMenuOpen ? (
+              <X className="h-4 w-4" />
+            ) : (
+              <Menu className="h-4 w-4" />
+            )}
+          </Button>
+        </div>
       </div>
+
+      {/* Mobile collapsible dropdown menu: links -> ES | EN pill -> theme/CTA */}
+      {mobileMenuOpen && (
+        <div className="border-t border-border/80 bg-background/95 px-4 py-4 backdrop-blur-md md:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col gap-3">
+            <Link
+              href="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className="rounded-xl px-3 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+            >
+              {t.navbar.allToolsLink}
+            </Link>
+
+            <div className="flex items-center justify-between rounded-xl border border-border/70 bg-card/60 px-3 py-2.5">
+              <span className="text-xs font-medium text-muted-foreground">
+                {t.navbar.languageLabel}
+              </span>
+              <LanguageToggle />
+            </div>
+
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => {
+                setTheme(isDark ? "light" : "dark");
+                setMobileMenuOpen(false);
+              }}
+              className="w-full justify-center rounded-xl border-border/90"
+            >
+              {isDark ? (
+                <>
+                  <Sun className="h-4 w-4 text-[#FACC15]" />
+                  {t.navbar.switchToLight}
+                </>
+              ) : (
+                <>
+                  <Moon className="h-4 w-4 text-zinc-700" />
+                  {t.navbar.switchToDark}
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
 
 export function BetaNoticeBanner() {
+  const { t } = useLanguage();
   const [dismissed, setDismissed] = React.useState(false);
 
   if (dismissed) return null;
@@ -79,21 +156,21 @@ export function BetaNoticeBanner() {
           <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#CA8A04] dark:text-[#FACC15] sm:mt-0" />
           <p className="leading-relaxed">
             <strong className="font-semibold text-foreground">
-              Versión gratuita de prueba de JoApps:
+              {t.betaBanner.title}
             </strong>{" "}
-            sin registro y sin marcas de agua. Las 8 herramientas locales operan{" "}
+            {t.betaBanner.beforeLocal}{" "}
             <span className="font-medium text-emerald-700 dark:text-emerald-400">
-              100% en tu dispositivo
+              {t.betaBanner.localHighlight}
             </span>
-            ; las conversiones de servidor admiten hasta{" "}
-            <strong className="font-semibold">20 MB</strong> y pueden tardar ~30-40s la
-            primera vez si el servidor gratuito entra en reposo.
+            {t.betaBanner.middle}{" "}
+            <strong className="font-semibold">{t.betaBanner.limit}</strong>{" "}
+            {t.betaBanner.after}
           </p>
         </div>
         <button
           type="button"
           onClick={() => setDismissed(true)}
-          aria-label="Ocultar aviso"
+          aria-label={t.betaBanner.dismissAria}
           className="rounded-lg p-1 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
         >
           <X className="h-3.5 w-3.5" />

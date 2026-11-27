@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/card";
 import { PDF_TOOLS } from "@/lib/tools";
+import { useLanguage } from "@/context/language-context";
 
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 const WEB3FORMS_ACCESS_KEY =
@@ -21,13 +22,8 @@ const WEB3FORMS_ACCESS_KEY =
   "244bd39e-6ccc-4d45-9f07-0c55a2eb248a";
 const FALLBACK_EMAIL = "jbs.microapps@gmail.com";
 
-const CATEGORY_LABELS: Record<"bug" | "suggestion" | "other", string> = {
-  bug: "Reportar error",
-  suggestion: "Sugerencia",
-  other: "Otro",
-};
-
 export function Footer() {
+  const { t } = useLanguage();
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -52,11 +48,9 @@ export function Footer() {
                 <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
                 <p>
                   <strong className="text-foreground">
-                    Privacidad primero (cero almacenamiento permanente):
+                    {t.footer.privacyTitle}
                   </strong>{" "}
-                  las operaciones locales nunca salen de tu navegador. En las conversiones
-                  de servidor, los archivos temporales se eliminan inmediatamente al
-                  finalizar tu descarga.
+                  {t.footer.privacyText}
                 </p>
               </div>
             </div>
@@ -69,7 +63,7 @@ export function Footer() {
                 className="border-[#FACC15]/40 hover:border-[#FACC15] hover:bg-[#FACC15]/10"
               >
                 <MessageSquarePlus className="h-4 w-4 text-[#EAB308] dark:text-[#FACC15]" />
-                Enviar comentarios o reportar error
+                {t.footer.feedbackButton}
               </Button>
             </div>
           </div>
@@ -77,9 +71,9 @@ export function Footer() {
           <div className="mt-8 flex flex-col items-start justify-between gap-2 border-t border-border/70 pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
             <p>
               © {new Date().getFullYear()} <strong className="text-foreground">JoApps</strong>{" "}
-              — PDFNauta (Versión Gratuita de Prueba Beta).
+              {t.footer.copyrightSuffix}
             </p>
-            <p>Sin registro • Sin marcas de agua • Arquitectura segura</p>
+            <p>{t.footer.bottomBadges}</p>
           </div>
         </div>
       </footer>
@@ -90,6 +84,7 @@ export function Footer() {
 }
 
 function FeedbackModal({ onClose }: { onClose: () => void }) {
+  const { t } = useLanguage();
   const [category, setCategory] = React.useState<"bug" | "suggestion" | "other">("bug");
   const [tool, setTool] = React.useState("general");
   const [email, setEmail] = React.useState("");
@@ -113,11 +108,19 @@ function FeedbackModal({ onClose }: { onClose: () => void }) {
     };
   }, [onClose]);
 
-  const tipoSeleccionado = CATEGORY_LABELS[category];
+  const categoryLabels: Record<"bug" | "suggestion" | "other", string> = {
+    bug: t.feedbackModal.categoryBug,
+    suggestion: t.feedbackModal.categorySuggestion,
+    other: t.feedbackModal.categoryOther,
+  };
+
+  const tipoSeleccionado = categoryLabels[category];
   const herramientaRelacionada =
     tool === "general"
-      ? "General / Portada"
-      : PDF_TOOLS.find((t) => t.slug === tool)?.title || tool;
+      ? t.feedbackModal.toolGeneral
+      : t.tools[tool as keyof typeof t.tools]?.title ||
+        PDF_TOOLS.find((item) => item.slug === tool)?.title ||
+        tool;
 
   const fallbackMailtoHref = React.useMemo(() => {
     const subject = encodeURIComponent(
@@ -133,7 +136,7 @@ function FeedbackModal({ onClose }: { onClose: () => void }) {
 
     if (message.trim().length < 5) {
       setShowMailtoFallback(false);
-      setError("Cuéntanos brevemente qué ocurrió o qué te gustaría mejorar.");
+      setError(t.feedbackModal.errorTooShort);
       return;
     }
 
@@ -178,15 +181,11 @@ function FeedbackModal({ onClose }: { onClose: () => void }) {
         }, 2800);
       } else {
         setShowMailtoFallback(true);
-        setError(
-          "No se pudo enviar tu mensaje en este momento. Intenta de nuevo o escríbenos directamente por correo."
-        );
+        setError(t.feedbackModal.errorServer);
       }
     } catch {
       setShowMailtoFallback(true);
-      setError(
-        "No se pudo enviar el mensaje por un problema de conexión. Puedes intentarlo nuevamente o escribirnos por correo."
-      );
+      setError(t.feedbackModal.errorNetwork);
     } finally {
       setSending(false);
     }
@@ -207,16 +206,16 @@ function FeedbackModal({ onClose }: { onClose: () => void }) {
         <div className="flex items-start justify-between gap-4">
           <div>
             <h2 id="feedback-modal-title" className="text-lg font-bold text-foreground">
-              Comentarios o reporte de error
+              {t.feedbackModal.title}
             </h2>
             <p className="mt-1 text-xs text-muted-foreground">
-              Ayúdanos a pulir PDFNauta by JoApps en esta versión Beta.
+              {t.feedbackModal.subtitle}
             </p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            aria-label="Cerrar"
+            aria-label={t.feedbackModal.closeAria}
             className="rounded-lg p-1.5 text-muted-foreground hover:bg-secondary hover:text-foreground"
           >
             <X className="h-4 w-4" />
@@ -229,29 +228,28 @@ function FeedbackModal({ onClose }: { onClose: () => void }) {
               <CheckCircle2 className="h-6 w-6" />
             </div>
             <h3 className="mt-3 text-base font-bold">
-              ¡Mensaje enviado! Gracias por ayudar a mejorar PDFNauta
+              {t.feedbackModal.successTitle}
             </h3>
             <p className="mt-1 max-w-sm text-sm text-muted-foreground">
-              Recibimos tus comentarios correctamente. Esta ventana se cerrará en unos
-              segundos.
+              {t.feedbackModal.successText}
             </p>
             <Button type="button" onClick={onClose} className="mt-5">
-              Cerrar
+              {t.feedbackModal.closeButton}
             </Button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="mt-5 space-y-4">
             <div className="grid grid-cols-3 gap-2">
               {[
-                { id: "bug", label: "Reportar error" },
-                { id: "suggestion", label: "Sugerencia" },
-                { id: "other", label: "Otro" },
+                { id: "bug" as const, label: t.feedbackModal.categoryBug },
+                { id: "suggestion" as const, label: t.feedbackModal.categorySuggestion },
+                { id: "other" as const, label: t.feedbackModal.categoryOther },
               ].map((item) => (
                 <button
                   key={item.id}
                   type="button"
                   disabled={sending}
-                  onClick={() => setCategory(item.id as "bug" | "suggestion" | "other")}
+                  onClick={() => setCategory(item.id)}
                   className={`rounded-xl border px-3 py-2 text-xs font-semibold transition-colors ${
                     category === item.id
                       ? "border-[#FACC15] bg-[#FACC15]/15 text-foreground"
@@ -266,7 +264,7 @@ function FeedbackModal({ onClose }: { onClose: () => void }) {
             <div className="grid gap-3 sm:grid-cols-2">
               <div>
                 <label className="mb-1.5 block text-xs font-medium text-muted-foreground">
-                  Herramienta relacionada
+                  {t.feedbackModal.toolLabel}
                 </label>
                 <select
                   value={tool}
@@ -274,31 +272,31 @@ function FeedbackModal({ onClose }: { onClose: () => void }) {
                   onChange={(e) => setTool(e.target.value)}
                   className="flex h-10 w-full rounded-xl border border-input bg-background px-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15] disabled:opacity-50"
                 >
-                  <option value="general">General / Portada</option>
-                  {PDF_TOOLS.map((t) => (
-                    <option key={t.slug} value={t.slug}>
-                      {t.title}
+                  <option value="general">{t.feedbackModal.toolGeneral}</option>
+                  {PDF_TOOLS.map((item) => (
+                    <option key={item.slug} value={item.slug}>
+                      {t.tools[item.slug as keyof typeof t.tools]?.title ?? item.title}
                     </option>
                   ))}
                 </select>
               </div>
               <div>
                 <label className="mb-1.5 block text-xs font-medium text-muted-foreground">
-                  Email (opcional)
+                  {t.feedbackModal.emailLabel}
                 </label>
                 <Input
                   type="email"
                   disabled={sending}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="tu@email.com"
+                  placeholder={t.feedbackModal.emailPlaceholder}
                 />
               </div>
             </div>
 
             <div>
               <label className="mb-1.5 block text-xs font-medium text-muted-foreground">
-                Mensaje *
+                {t.feedbackModal.messageLabel}
               </label>
               <textarea
                 rows={4}
@@ -306,7 +304,7 @@ function FeedbackModal({ onClose }: { onClose: () => void }) {
                 disabled={sending}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Describe el problema, navegador utilizado o tu idea de mejora..."
+                placeholder={t.feedbackModal.messagePlaceholder}
                 className="w-full rounded-xl border border-input bg-background px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15] disabled:opacity-50"
               />
             </div>
@@ -328,7 +326,7 @@ function FeedbackModal({ onClose }: { onClose: () => void }) {
 
             <div className="flex justify-end gap-2 pt-2">
               <Button type="button" variant="ghost" disabled={sending} onClick={onClose}>
-                Cancelar
+                {t.feedbackModal.cancel}
               </Button>
               <Button type="submit" disabled={sending}>
                 {sending ? (
@@ -336,7 +334,7 @@ function FeedbackModal({ onClose }: { onClose: () => void }) {
                 ) : (
                   <Send className="h-4 w-4" />
                 )}
-                {sending ? "Enviando..." : "Enviar mensaje"}
+                {sending ? t.feedbackModal.sending : t.feedbackModal.submit}
               </Button>
             </div>
           </form>

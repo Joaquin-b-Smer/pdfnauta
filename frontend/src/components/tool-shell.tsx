@@ -7,6 +7,7 @@ import type { PdfToolMeta } from "@/lib/tools";
 import { Badge } from "@/components/ui/badge";
 import { ToolIcon } from "@/components/tool-icon";
 import { ServerWarmupStatus } from "@/components/server-status";
+import { useLanguage } from "@/context/language-context";
 
 interface ToolShellProps {
   tool: PdfToolMeta;
@@ -14,7 +15,15 @@ interface ToolShellProps {
 }
 
 export function ToolShell({ tool, children }: ToolShellProps) {
+  const { t } = useLanguage();
   const isLocal = tool.execution === "local";
+  const localized = t.tools[tool.slug as keyof typeof t.tools] as
+    | { title?: string; description?: string; pageSubtitle?: string }
+    | undefined;
+
+  const title = localized?.title ?? tool.title;
+  const subtitle =
+    localized?.pageSubtitle ?? localized?.description ?? tool.pageSubtitle ?? tool.description;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
@@ -24,18 +33,18 @@ export function ToolShell({ tool, children }: ToolShellProps) {
           className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-3.5 py-2 text-xs font-semibold text-muted-foreground transition-colors hover:border-[#FACC15]/50 hover:text-foreground"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
-          Volver a todas las herramientas
+          {t.toolShell.backLink}
         </Link>
 
         {isLocal ? (
           <Badge variant="local" className="px-3 py-1 text-xs">
             <ShieldCheck className="h-3.5 w-3.5" />
-            Procesamiento local • 100% Privado
+            {t.toolShell.badgeLocal}
           </Badge>
         ) : (
           <Badge variant="server" className="px-3 py-1 text-xs">
             <Server className="h-3.5 w-3.5" />
-            Motor de Alta Precisión • Máx. 20 MB
+            {t.toolShell.badgeServer}
           </Badge>
         )}
       </div>
@@ -53,10 +62,10 @@ export function ToolShell({ tool, children }: ToolShellProps) {
           </div>
           <div>
             <h1 className="text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
-              {tool.title}
+              {title}
             </h1>
             <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-              {tool.pageSubtitle ?? tool.description}
+              {subtitle}
             </p>
           </div>
         </div>
@@ -68,12 +77,11 @@ export function ToolShell({ tool, children }: ToolShellProps) {
             <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[#CA8A04] dark:text-[#FACC15]" />
             <div>
               <strong className="font-semibold text-foreground">
-                Nota de la versión gratuita de prueba (JoApps):
+                {t.toolShell.serverNoteTitle}
               </strong>{" "}
-              Esta herramienta utiliza nuestro motor Python dedicado (límite de{" "}
-              <strong>20 MB</strong>, sin marcas de agua, borrado automático tras la
-              descarga). Si el servidor gratuito estuvo inactivo, la primera conversión
-              puede demorar ~30-40 segundos en despertar.
+              {t.toolShell.serverNoteBefore}{" "}
+              <strong>{t.toolShell.serverNoteLimit}</strong>
+              {t.toolShell.serverNoteAfter}
             </div>
           </div>
           <div className="shrink-0 pl-7 sm:pl-0">

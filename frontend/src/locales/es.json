@@ -1,0 +1,178 @@
+{
+  "navbar": {
+    "tagline": "Suite PDF rápida, privada y sin marcas de agua",
+    "betaFull": "Versión Gratuita de Prueba (Beta)",
+    "betaShort": "Beta Gratuita",
+    "switchToLight": "Cambiar a modo claro",
+    "switchToDark": "Cambiar a modo oscuro",
+    "themeLight": "Modo claro",
+    "themeDark": "Modo oscuro",
+    "languageAria": "Seleccionar idioma",
+    "menuAria": "Abrir menú",
+    "closeMenuAria": "Cerrar menú",
+    "allToolsLink": "Todas las herramientas",
+    "languageLabel": "Idioma"
+  },
+  "betaBanner": {
+    "title": "Versión gratuita de prueba de JoApps:",
+    "beforeLocal": "sin registro y sin marcas de agua. Las 8 herramientas locales operan",
+    "localHighlight": "100% en tu dispositivo",
+    "middle": "; las conversiones de servidor admiten hasta",
+    "limit": "20 MB",
+    "after": "y pueden tardar ~30-40s la primera vez si el servidor gratuito entra en reposo.",
+    "dismissAria": "Ocultar aviso"
+  },
+  "hero": {
+    "pill": "Suite PDF Todo-en-Uno • JoApps",
+    "titleBefore": "Domina tus documentos",
+    "titleAccent": "PDF",
+    "titleAfter": "sin registros ni esperas.",
+    "subtitleBefore": "10 herramientas esenciales en un solo lugar: 8 corren",
+    "subtitleStrong": "100% en tu navegador",
+    "subtitleAfter": "para privacidad absoluta y 2 usan nuestro motor Python de alta precisión para Word y compresión avanzada.",
+    "badgeLocal": "Procesamiento local privado",
+    "badgeNoWatermark": "Sin marcas de agua",
+    "badgeNoStorage": "Cero almacenamiento permanente"
+  },
+  "smartDrop": {
+    "tag": "Smart Drop",
+    "title": "Suelta un PDF aquí y elige qué hacer",
+    "subtitle": "Detectamos PDF o imágenes y te llevamos directo a la herramienta ideal.",
+    "modalTitle": "¿Qué deseas hacer con este PDF?",
+    "closeAria": "Cerrar",
+    "localTag": "Local • 100% Privado",
+    "serverTag": "Servidor • Alta Precisión"
+  },
+  "toolsSection": {
+    "categoriesAria": "Filtrar herramientas por categoría",
+    "searchPlaceholder": "Buscar herramienta (ej. firmar, excel, word...)",
+    "searchAria": "Buscar herramienta",
+    "clearSearchAria": "Limpiar búsqueda",
+    "emptyTitle": "No encontramos herramientas que coincidan con",
+    "emptyReset": "Ver las 10 herramientas disponibles",
+    "badgeLocal": "Local • 100% Privado",
+    "badgeServer": "Servidor • Alta Precisión",
+    "openAction": "Abrir"
+  },
+  "categories": {
+    "todas": "Todas",
+    "convertir": "Convertir",
+    "organizar": "Organizar",
+    "optimizar": "Optimizar",
+    "seguridad": "Seguridad"
+  },
+  "toolShell": {
+    "backLink": "Volver a todas las herramientas",
+    "badgeLocal": "Procesamiento local • 100% Privado",
+    "badgeServer": "Motor de Alta Precisión • Máx. 20 MB",
+    "serverNoteTitle": "Nota de la versión gratuita de prueba (JoApps):",
+    "serverNoteBefore": "Esta herramienta utiliza nuestro motor Python dedicado (límite de",
+    "serverNoteLimit": "20 MB",
+    "serverNoteAfter": ", sin marcas de agua, borrado automático tras la descarga). Si el servidor gratuito estuvo inactivo, la primera conversión puede demorar ~30-40 segundos en despertar."
+  },
+  "serverStatus": {
+    "ready": "Servidor listo para procesar",
+    "unverified": "Servidor no verificado aún",
+    "retry": "Reintentar",
+    "warming": "Preparando servidor de conversión…",
+    "stages": {
+      "connecting": "Conectando con el servidor…",
+      "processing": "Procesando archivo…",
+      "downloading": "Preparando descarga…"
+    },
+    "slowStartNote": "El servidor gratuito puede tardar ~30–40 segundos en despertar si estuvo en reposo. Mantén esta pestaña abierta; tu descarga iniciará automáticamente."
+  },
+  "tools": {
+    "unir-pdf": {
+      "title": "Unir PDF",
+      "shortTitle": "Unir",
+      "description": "Combina múltiples archivos PDF en un solo documento con vista previa de portadas y reordenamiento libre.",
+      "highlights": ["Miniaturas en tiempo real", "Arrastrar y soltar", "Sin subir archivos"]
+    },
+    "separar-pdf": {
+      "title": "Separar PDF",
+      "shortTitle": "Separar",
+      "description": "Extrae rangos específicos (ej. 1-3, 5, 8-10) o divide cada página en archivos individuales en un .zip.",
+      "highlights": ["Rangos personalizados", "Descarga en .zip", "Instantáneo"]
+    },
+    "organizar-paginas": {
+      "title": "Organizar y Editar Páginas",
+      "shortTitle": "Organizar",
+      "description": "Visualiza todas las páginas en cuadrícula para rotar 90°, eliminar, duplicar o cambiar su orden.",
+      "highlights": ["Rotación individual", "Duplicar y eliminar", "Reordenar con drag-and-drop"]
+    },
+    "pdf-imagenes": {
+      "title": "PDF a JPG / PNG y viceversa",
+      "shortTitle": "PDF ↔ Imágenes",
+      "description": "Exporta páginas de un PDF como imágenes de alta nitidez (.zip) o une JPG, PNG y WebP en un PDF.",
+      "highlights": ["Alta resolución", "Márgenes y orientación", "Soporte JPG, PNG y WebP"]
+    },
+    "firmar-pdf": {
+      "title": "Firmar PDF",
+      "shortTitle": "Firmar",
+      "description": "Dibuja tu firma, escríbela con estilo caligráfico o sube un PNG transparente y ubícala libremente.",
+      "highlights": ["Dibujo, texto o imagen", "Redimensionado visual", "Múltiples páginas"]
+    },
+    "marca-agua-numeracion": {
+      "title": "Marca de Agua y Numeración",
+      "shortTitle": "Marca y Números",
+      "description": "Añade texto de marca de agua o numeración (Página X de Y) ajustando opacidad, color, tamaño y posición.",
+      "highlights": ["Vista previa interactiva", "Página X de Y", "Control de opacidad y posición"]
+    },
+    "proteger-desbloquear": {
+      "title": "Proteger y Desbloquear PDF",
+      "shortTitle": "Proteger / Abrir",
+      "description": "Cifra tus PDF con contraseña para proteger su acceso o quita la clave de tus propios documentos.",
+      "highlights": ["Cifrado en navegador", "Quitar contraseña propia", "Cero envío a servidores"]
+    },
+    "pdf-a-word": {
+      "title": "PDF a Word (.docx)",
+      "shortTitle": "PDF a Word",
+      "description": "Conversión fiel preservando tablas, columnas, fuentes e imágenes, con OCR opcional para escaneos.",
+      "highlights": ["Preserva tablas e imágenes", "OCR para escaneados", "Motor Python de precisión"]
+    },
+    "pdf-to-excel": {
+      "title": "PDF to Excel",
+      "shortTitle": "PDF to Excel",
+      "description": "Extraé las tablas de tu PDF y descargalas en Excel para editar",
+      "pageSubtitle": "Subí tu PDF con tablas y descargalo en Excel listo para editar. 100% gratis y sin registro.",
+      "highlights": ["Vista previa de tabla", "Exportación .xlsx", "100% en tu navegador"]
+    },
+    "comprimir-pdf": {
+      "title": "Comprimir PDF",
+      "shortTitle": "Comprimir",
+      "description": "Reduce el peso de tus PDF eligiendo entre 3 niveles (Extrema, Recomendada, Baja) con ahorro visible.",
+      "highlights": ["3 niveles de compresión", "Porcentaje de ahorro", "Optimización inteligente"]
+    }
+  },
+  "footer": {
+    "privacyTitle": "Privacidad primero (cero almacenamiento permanente):",
+    "privacyText": "las operaciones locales nunca salen de tu navegador. En las conversiones de servidor, los archivos temporales se eliminan inmediatamente al finalizar tu descarga.",
+    "feedbackButton": "Enviar comentarios o reportar error",
+    "copyrightSuffix": "— PDFNauta (Versión Gratuita de Prueba Beta).",
+    "bottomBadges": "Sin registro • Sin marcas de agua • Arquitectura segura"
+  },
+  "feedbackModal": {
+    "title": "Comentarios o reporte de error",
+    "subtitle": "Ayúdanos a pulir PDFNauta by JoApps en esta versión Beta.",
+    "closeAria": "Cerrar",
+    "successTitle": "¡Mensaje enviado! Gracias por ayudar a mejorar PDFNauta",
+    "successText": "Recibimos tus comentarios correctamente. Esta ventana se cerrará en unos segundos.",
+    "closeButton": "Cerrar",
+    "categoryBug": "Reportar error",
+    "categorySuggestion": "Sugerencia",
+    "categoryOther": "Otro",
+    "toolLabel": "Herramienta relacionada",
+    "toolGeneral": "General / Portada",
+    "emailLabel": "Email (opcional)",
+    "emailPlaceholder": "tu@email.com",
+    "messageLabel": "Mensaje *",
+    "messagePlaceholder": "Describe el problema, navegador utilizado o tu idea de mejora...",
+    "errorTooShort": "Cuéntanos brevemente qué ocurrió o qué te gustaría mejorar.",
+    "errorServer": "No se pudo enviar tu mensaje en este momento. Intenta de nuevo o escríbenos directamente por correo.",
+    "errorNetwork": "No se pudo enviar el mensaje por un problema de conexión. Puedes intentarlo nuevamente o escribirnos por correo.",
+    "cancel": "Cancelar",
+    "sending": "Enviando...",
+    "submit": "Enviar mensaje"
+  }
+}
