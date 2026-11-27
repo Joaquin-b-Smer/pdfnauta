@@ -13,6 +13,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/card";
 import { PDF_TOOLS } from "@/lib/tools";
 import { useLanguage } from "@/context/language-context";
@@ -64,15 +65,14 @@ export function Footer() {
             </div>
 
             <div className="flex flex-wrap items-center gap-2.5">
-              <Button
+              <button
                 type="button"
-                variant="outline"
                 onClick={() => setOpenWhatsNew(true)}
-                className="border-purple-400/40 hover:border-purple-400 hover:bg-purple-400/10"
+                className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-medium text-emerald-700 transition-colors hover:bg-emerald-500/20 dark:text-emerald-400"
               >
-                <Sparkles className="h-4 w-4 text-purple-600 dark:text-purple-300" />
+                <Sparkles className="h-3 w-3" />
                 {t.footer.whatsNewButton}
-              </Button>
+              </button>
               <Button
                 type="button"
                 variant="outline"
@@ -94,17 +94,19 @@ export function Footer() {
           </div>
 
           <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-border/50 pt-4 text-[11px] text-muted-foreground">
-            <p className="font-medium text-foreground/85">
-              PDFNauta{" "}
-              <span className="font-bold text-purple-700 dark:text-purple-300">
+            <p className="inline-flex flex-wrap items-center gap-1.5 font-medium text-foreground/85">
+              <span>PDFNauta</span>
+              <Badge variant="local" className="text-[11px]">
                 {APP_VERSION}
-              </span>{" "}
-              - {APP_VERSION_STATUS[language]} • {APP_RELEASE_DATE}
+              </Badge>
+              <span>
+                - {APP_VERSION_STATUS[language]} • {APP_RELEASE_DATE}
+              </span>
             </p>
             <button
               type="button"
               onClick={() => setOpenWhatsNew(true)}
-              className="font-semibold text-purple-700 underline-offset-4 hover:underline dark:text-purple-300"
+              className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-medium text-emerald-700 transition-colors hover:bg-emerald-500/20 dark:text-emerald-400"
             >
               {t.footer.whatsNewButton}
             </button>
@@ -150,9 +152,9 @@ function WhatsNewModal({ onClose }: { onClose: () => void }) {
               >
                 {t.footer.whatsNewTitle}
               </h2>
-              <span className="inline-flex items-center rounded-full border border-purple-400/40 bg-purple-400/15 px-2 py-0.5 text-[11px] font-bold text-purple-700 dark:border-purple-300/35 dark:bg-purple-400/20 dark:text-purple-200">
+              <Badge variant="local" className="text-[11px]">
                 {APP_VERSION}
-              </span>
+              </Badge>
             </div>
             <p className="text-xs text-muted-foreground">
               {t.footer.whatsNewSubtitle}
@@ -172,13 +174,13 @@ function WhatsNewModal({ onClose }: { onClose: () => void }) {
           {CHANGELOG.map((entry) => (
             <li
               key={entry.version}
-              className="rounded-xl border border-purple-400/25 bg-purple-400/[0.06] p-4"
+              className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4"
             >
               <div className="flex items-center justify-between gap-2">
-                <span className="inline-flex items-center gap-1.5 text-sm font-extrabold text-purple-700 dark:text-purple-300">
-                  <Sparkles className="h-3.5 w-3.5" />
+                <Badge variant="local" className="text-[11px]">
+                  <Sparkles className="h-3 w-3" />
                   {entry.version}
-                </span>
+                </Badge>
                 <span className="text-[11px] font-medium text-muted-foreground">
                   {entry.date}
                 </span>
