@@ -5,19 +5,21 @@ import {
   FileType,
   Download,
   Loader2,
-  Clock,
   AlertCircle,
   CheckCircle2,
   RefreshCw,
 } from "lucide-react";
 import { FileDropzone } from "@/components/file-dropzone";
+import { ServerOperationProgress } from "@/components/server-status";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { usePendingFile } from "@/context/pending-file-context";
 import {
   MAX_SERVER_FILE_BYTES,
   MAX_SERVER_FILE_MB,
+  OPERATION_STAGE_LABELS,
   postFileToBackend,
+  type OperationStage,
 } from "@/lib/api";
 import { downloadBlob, formatBytes, stripExtension } from "@/lib/utils";
 
@@ -25,6 +27,7 @@ export function WordToPdfTool() {
   const { consumePendingFile } = usePendingFile();
   const [file, setFile] = React.useState<File | null>(null);
   const [processing, setProcessing] = React.useState(false);
+  const [stage, setStage] = React.useState<OperationStage>("connecting");
   const [slowStart, setSlowStart] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [result, setResult] = React.useState<{
@@ -32,7 +35,10 @@ export function WordToPdfTool() {
     filename: string;
   } | null>(null);
 
+  const inFlightRef = React.useRef(false);
+
   const selectFile = React.useCallback((selected: File) => {
+    if (inFlightRef.current) return;
     setError(null);
     setResult(null);
     const lower = selected.name.toLowerCase();
@@ -55,8 +61,10 @@ export function WordToPdfTool() {
   }, [consumePendingFile, selectFile]);
 
   const handleConvert = async () => {
-    if (!file) return;
+    if (!file || inFlightRef.current) return;
+    inFlightRef.current = true;
     setProcessing(true);
+    setStage("connecting");
     setSlowStart(false);
     setError(null);
     setResult(null);
@@ -69,7 +77,10 @@ export function WordToPdfTool() {
         "/api/word-to-pdf",
         formData,
         `${stripExtension(file.name)}.pdf`,
-        { onSlowStart: setSlowStart }
+        {
+          onSlowStart: setSlowStart,
+          onStageChange: setStage,
+        }
       );
 
       setResult({ blob: res.blob, filename: res.filename });
@@ -79,6 +90,7 @@ export function WordToPdfTool() {
         err instanceof Error ? err.message : "Error al convertir Word a PDF."
       );
     } finally {
+      inFlightRef.current = false;
       setProcessing(false);
       setSlowStart(false);
     }
@@ -122,23 +134,15 @@ export function WordToPdfTool() {
             </Button>
           </div>
 
-          {slowStart && (
-            <div className="flex items-start gap-3 rounded-xl border border-[#FACC15]/50 bg-[#FACC15]/12 p-4 text-xs leading-relaxed text-foreground">
-              <Clock className="mt-0.5 h-4 w-4 shrink-0 animate-pulse text-[#CA8A04] dark:text-[#FACC15]" />
-              <div>
-                <p className="font-bold">
-                  Iniciando motor de conversión gratuito, esto puede demorar hasta 40
-                  segundos la primera vez...
-                </p>
-                <p className="mt-0.5 text-muted-foreground">
-                  Una vez activo, las siguientes conversiones se completan en segundos.
-                </p>
-              </div>
-            </div>
+          {processing && (
+            <ServerOperationProgress stage={stage} slowStart={slowStart} />
           )}
 
           {error && (
-            <div className="flex items-start gap-2.5 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-xs text-red-500">
+            <div
+              role="alert"
+              className="flex items-start gap-2.5 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-xs text-red-500"
+            >
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
               <span>{error}</span>
             </div>
@@ -172,12 +176,13 @@ export function WordToPdfTool() {
             size="lg"
             className="w-full"
             disabled={processing}
+            aria-busy={processing}
             onClick={handleConvert}
           >
             {processing ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Convirtiendo Word a PDF...
+                {OPERATION_STAGE_LABELS[stage]}
               </>
             ) : (
               <>

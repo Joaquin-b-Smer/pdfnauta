@@ -6,6 +6,7 @@ import { ArrowLeft, ShieldCheck, Server, Clock } from "lucide-react";
 import type { PdfToolMeta } from "@/lib/tools";
 import { Badge } from "@/components/ui/badge";
 import { ToolIcon } from "@/components/tool-icon";
+import { ServerWarmupStatus } from "@/components/server-status";
 
 interface ToolShellProps {
   tool: PdfToolMeta;
@@ -56,16 +57,21 @@ export function ToolShell({ tool, children }: ToolShellProps) {
       </div>
 
       {!isLocal && (
-        <div className="mb-6 flex items-start gap-3 rounded-2xl border border-[#FACC15]/30 bg-[#FACC15]/[0.07] p-4 text-xs leading-relaxed text-foreground/90">
-          <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[#CA8A04] dark:text-[#FACC15]" />
-          <div>
-            <strong className="font-semibold text-foreground">
-              Nota de la versión gratuita de prueba (JoApps):
-            </strong>{" "}
-            Esta herramienta utiliza nuestro motor Python dedicado (límite de{" "}
-            <strong>20 MB</strong>, sin marcas de agua, borrado automático tras la
-            descarga). Si el servidor gratuito estuvo inactivo, la primera conversión
-            puede demorar ~30-40 segundos en despertar.
+        <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-[#FACC15]/30 bg-[#FACC15]/[0.07] p-4 text-xs leading-relaxed text-foreground/90 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-start gap-3">
+            <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[#CA8A04] dark:text-[#FACC15]" />
+            <div>
+              <strong className="font-semibold text-foreground">
+                Nota de la versión gratuita de prueba (JoApps):
+              </strong>{" "}
+              Esta herramienta utiliza nuestro motor Python dedicado (límite de{" "}
+              <strong>20 MB</strong>, sin marcas de agua, borrado automático tras la
+              descarga). Si el servidor gratuito estuvo inactivo, la primera conversión
+              puede demorar ~30-40 segundos en despertar.
+            </div>
+          </div>
+          <div className="shrink-0 pl-7 sm:pl-0">
+            <ServerWarmupStatus />
           </div>
         </div>
       )}

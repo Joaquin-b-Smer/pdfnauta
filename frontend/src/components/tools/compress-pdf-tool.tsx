@@ -5,7 +5,6 @@ import {
   Minimize2,
   Download,
   Loader2,
-  Clock,
   AlertCircle,
   CheckCircle2,
   RefreshCw,
@@ -13,13 +12,16 @@ import {
   Sparkles,
 } from "lucide-react";
 import { FileDropzone } from "@/components/file-dropzone";
+import { ServerOperationProgress } from "@/components/server-status";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { usePendingFile } from "@/context/pending-file-context";
 import {
   MAX_SERVER_FILE_BYTES,
   MAX_SERVER_FILE_MB,
+  OPERATION_STAGE_LABELS,
   postFileToBackend,
+  type OperationStage,
 } from "@/lib/api";
 import { downloadBlob, formatBytes, stripExtension } from "@/lib/utils";
 
@@ -57,6 +59,7 @@ export function CompressPdfTool() {
   const [level, setLevel] = React.useState<CompressionLevel>("recommended");
 
   const [processing, setProcessing] = React.useState(false);
+  const [stage, setStage] = React.useState<OperationStage>("connecting");
   const [slowStart, setSlowStart] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [result, setResult] = React.useState<{
@@ -67,7 +70,10 @@ export function CompressPdfTool() {
     savingsPercent: number;
   } | null>(null);
 
+  const inFlightRef = React.useRef(false);
+
   const selectFile = React.useCallback((selected: File) => {
+    if (inFlightRef.current) return;
     setError(null);
     setResult(null);
     if (!selected.name.toLowerCase().endsWith(".pdf")) {
@@ -89,8 +95,10 @@ export function CompressPdfTool() {
   }, [consumePendingFile, selectFile]);
 
   const handleCompress = async () => {
-    if (!file) return;
+    if (!file || inFlightRef.current) return;
+    inFlightRef.current = true;
     setProcessing(true);
+    setStage("connecting");
     setSlowStart(false);
     setError(null);
     setResult(null);
@@ -104,7 +112,10 @@ export function CompressPdfTool() {
         "/api/compress-pdf",
         formData,
         `${stripExtension(file.name)}_comprimido.pdf`,
-        { onSlowStart: setSlowStart }
+        {
+          onSlowStart: setSlowStart,
+          onStageChange: setStage,
+        }
       );
 
       const origSize = res.headers.originalSize ?? file.size;
@@ -128,6 +139,7 @@ export function CompressPdfTool() {
         err instanceof Error ? err.message : "Error al comprimir el archivo PDF."
       );
     } finally {
+      inFlightRef.current = false;
       setProcessing(false);
       setSlowStart(false);
     }
@@ -219,24 +231,15 @@ export function CompressPdfTool() {
             </div>
           </div>
 
-          {slowStart && (
-            <div className="flex items-start gap-3 rounded-xl border border-[#FACC15]/50 bg-[#FACC15]/12 p-4 text-xs leading-relaxed text-foreground">
-              <Clock className="mt-0.5 h-4 w-4 shrink-0 animate-pulse text-[#CA8A04] dark:text-[#FACC15]" />
-              <div>
-                <p className="font-bold">
-                  Iniciando motor de conversión gratuito, esto puede demorar hasta 40
-                  segundos la primera vez...
-                </p>
-                <p className="mt-0.5 text-muted-foreground">
-                  Estamos despertando el servidor de compresión; tu archivo se descargará
-                  automáticamente.
-                </p>
-              </div>
-            </div>
+          {processing && (
+            <ServerOperationProgress stage={stage} slowStart={slowStart} />
           )}
 
           {error && (
-            <div className="flex items-start gap-2.5 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-xs text-red-500">
+            <div
+              role="alert"
+              className="flex items-start gap-2.5 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-xs text-red-500"
+            >
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
               <span>{error}</span>
             </div>
@@ -295,12 +298,13 @@ export function CompressPdfTool() {
             size="lg"
             className="w-full"
             disabled={processing}
+            aria-busy={processing}
             onClick={handleCompress}
           >
             {processing ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Comprimiendo PDF...
+                {OPERATION_STAGE_LABELS[stage]}
               </>
             ) : (
               <>
