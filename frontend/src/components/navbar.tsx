@@ -81,7 +81,7 @@ export function BetaNoticeBanner() {
             <strong className="font-semibold text-foreground">
               Versión gratuita de prueba de JoApps:
             </strong>{" "}
-            sin registro y sin marcas de agua. Las 7 herramientas locales operan{" "}
+            sin registro y sin marcas de agua. Las 8 herramientas locales operan{" "}
             <span className="font-medium text-emerald-700 dark:text-emerald-400">
               100% en tu dispositivo
             </span>

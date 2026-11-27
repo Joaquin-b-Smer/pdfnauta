@@ -12,7 +12,7 @@ import { SignPdfTool } from "@/components/tools/sign-pdf-tool";
 import { WatermarkNumberingTool } from "@/components/tools/watermark-numbering-tool";
 import { ProtectUnlockTool } from "@/components/tools/protect-unlock-tool";
 import { PdfToWordTool } from "@/components/tools/pdf-to-word-tool";
-import { WordToPdfTool } from "@/components/tools/word-to-pdf-tool";
+import { PdfToExcelTool } from "@/components/tools/pdf-to-excel-tool";
 import { CompressPdfTool } from "@/components/tools/compress-pdf-tool";
 
 export default function ToolPage() {
@@ -42,8 +42,8 @@ export default function ToolPage() {
         return <ProtectUnlockTool />;
       case "pdf-a-word":
         return <PdfToWordTool />;
-      case "word-a-pdf":
-        return <WordToPdfTool />;
+      case "pdf-to-excel":
+        return <PdfToExcelTool />;
       case "comprimir-pdf":
         return <CompressPdfTool />;
       default:

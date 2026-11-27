@@ -42,7 +42,13 @@ export function ToolShell({ tool, children }: ToolShellProps) {
 
       <div className="mb-8 flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#FACC15]/15 text-[#CA8A04] ring-1 ring-[#FACC15]/30 dark:text-[#FACC15]">
+          <div
+            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ring-1 ${
+              tool.icon === "pdf-excel"
+                ? "bg-[#217346]/15 text-[#217346] ring-[#217346]/30 dark:bg-emerald-500/15 dark:text-emerald-400 dark:ring-emerald-500/30"
+                : "bg-[#FACC15]/15 text-[#CA8A04] ring-[#FACC15]/30 dark:text-[#FACC15]"
+            }`}
+          >
             <ToolIcon name={tool.icon} className="h-6 w-6" />
           </div>
           <div>
@@ -50,7 +56,7 @@ export function ToolShell({ tool, children }: ToolShellProps) {
               {tool.title}
             </h1>
             <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-              {tool.description}
+              {tool.pageSubtitle ?? tool.description}
             </p>
           </div>
         </div>

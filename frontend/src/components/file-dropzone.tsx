@@ -10,6 +10,8 @@ interface FileDropzoneProps {
   onFilesSelected: (files: File[]) => void;
   title?: string;
   subtitle?: string;
+  buttonLabel?: string;
+  buttonClassName?: string;
   helperText?: string;
   compact?: boolean;
   disabled?: boolean;
@@ -21,6 +23,8 @@ export function FileDropzone({
   onFilesSelected,
   title = "Arrastra tu archivo aquí o haz clic para seleccionar",
   subtitle,
+  buttonLabel,
+  buttonClassName,
   helperText,
   compact = false,
   disabled = false,
@@ -110,8 +114,13 @@ export function FileDropzone({
         </p>
       )}
 
-      <div className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#FACC15] px-4 py-2 text-xs font-bold text-[#0A0A0A] shadow-sm transition-colors group-hover:bg-[#EAB308] sm:text-sm">
-        Elegir archivo{multiple ? "s" : ""}
+      <div
+        className={cn(
+          "mt-4 inline-flex items-center gap-2 rounded-xl bg-[#FACC15] px-4 py-2 text-xs font-bold text-[#0A0A0A] shadow-sm transition-colors group-hover:bg-[#EAB308] sm:text-sm",
+          buttonClassName
+        )}
+      >
+        {buttonLabel ?? `Elegir archivo${multiple ? "s" : ""}`}
       </div>
 
       {helperText && (

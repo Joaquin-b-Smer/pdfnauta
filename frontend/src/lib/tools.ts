@@ -16,7 +16,7 @@ export type ToolIconName =
   | "watermark"
   | "lock"
   | "pdf-word"
-  | "word-pdf"
+  | "pdf-excel"
   | "compress";
 
 export interface PdfToolMeta {
@@ -24,6 +24,7 @@ export interface PdfToolMeta {
   title: string;
   shortTitle: string;
   description: string;
+  pageSubtitle?: string;
   category: Exclude<ToolCategory, "todas">;
   execution: ToolExecution;
   icon: ToolIconName;
@@ -155,18 +156,20 @@ export const PDF_TOOLS: PdfToolMeta[] = [
     highlights: ["Preserva tablas e imágenes", "OCR para escaneados", "Motor Python de precisión"],
   },
   {
-    slug: "word-a-pdf",
-    title: "Word a PDF",
-    shortTitle: "Word a PDF",
+    slug: "pdf-to-excel",
+    title: "PDF to Excel",
+    shortTitle: "PDF to Excel",
     description:
-      "Transforma documentos .doc y .docx en PDF profesionales manteniendo el diseño original.",
+      "Extraé las tablas de tu PDF y descargalas en Excel para editar",
+    pageSubtitle:
+      "Subí tu PDF con tablas y descargalo en Excel listo para editar. 100% gratis y sin registro.",
     category: "convertir",
-    execution: "server",
-    icon: "word-pdf",
-    accept: ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    acceptLabel: "Archivos Word (.doc, .docx • máx. 20 MB)",
-    supportsPdfSmartDrop: false,
-    highlights: ["Soporte .doc y .docx", "LibreOffice Headless", "Sin marcas de agua"],
+    execution: "local",
+    icon: "pdf-excel",
+    accept: ".pdf,application/pdf",
+    acceptLabel: "Archivo PDF (máx. 10 MB)",
+    supportsPdfSmartDrop: true,
+    highlights: ["Vista previa de tabla", "Exportación .xlsx", "100% en tu navegador"],
   },
   {
     slug: "comprimir-pdf",

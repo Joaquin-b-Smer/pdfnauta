@@ -49,11 +49,6 @@ export default function HomePage() {
   const handleSmartFile = (file: File | undefined) => {
     if (!file) return;
     const name = file.name.toLowerCase();
-    if (name.endsWith(".doc") || name.endsWith(".docx")) {
-      setPendingFile(file);
-      router.push("/herramientas/word-a-pdf");
-      return;
-    }
     if (
       file.type.startsWith("image/") ||
       /\.(jpe?g|png|webp)$/i.test(name)
@@ -113,9 +108,9 @@ export default function HomePage() {
               </h1>
 
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-                10 herramientas esenciales en un solo lugar: 7 corren{" "}
+                10 herramientas esenciales en un solo lugar: 8 corren{" "}
                 <strong className="text-foreground">100% en tu navegador</strong> para
-                privacidad absoluta y 3 usan nuestro motor Python de alta precisión para
+                privacidad absoluta y 2 usan nuestro motor Python de alta precisión para
                 Word y compresión avanzada.
               </p>
 
@@ -156,7 +151,7 @@ export default function HomePage() {
                 <input
                   ref={smartInputRef}
                   type="file"
-                  accept=".pdf,.doc,.docx,image/jpeg,image/png,image/webp"
+                  accept=".pdf,image/jpeg,image/png,image/webp"
                   className="hidden"
                   onChange={(e) => {
                     handleSmartFile(e.target.files?.[0]);
@@ -175,8 +170,7 @@ export default function HomePage() {
                   Suelta un PDF aquí y elige qué hacer
                 </h2>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Detectamos PDF, Word (.doc/.docx) o imágenes y te llevamos directo a la
-                  herramienta ideal.
+                  Detectamos PDF o imágenes y te llevamos directo a la herramienta ideal.
                 </p>
               </div>
             </div>
@@ -311,7 +305,13 @@ export default function HomePage() {
                   onClick={() => launchToolWithSmartFile(tool.slug)}
                   className="group flex items-center gap-3 rounded-xl border border-border bg-background/80 p-3.5 text-left transition-all hover:border-[#FACC15] hover:bg-[#FACC15]/[0.06]"
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FACC15]/12 text-[#CA8A04] transition-colors group-hover:bg-[#FACC15] group-hover:text-[#0A0A0A] dark:text-[#FACC15]">
+                  <div
+                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors ${
+                      tool.icon === "pdf-excel"
+                        ? "bg-[#217346]/15 text-[#217346] group-hover:bg-[#217346] group-hover:text-white dark:bg-emerald-500/15 dark:text-emerald-400"
+                        : "bg-[#FACC15]/12 text-[#CA8A04] group-hover:bg-[#FACC15] group-hover:text-[#0A0A0A] dark:text-[#FACC15]"
+                    }`}
+                  >
                     <ToolIcon name={tool.icon} className="h-5 w-5" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -347,7 +347,13 @@ function ToolCard({ tool }: { tool: PdfToolMeta }) {
     >
       <div>
         <div className="flex items-start justify-between gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#FACC15]/12 text-[#CA8A04] ring-1 ring-[#FACC15]/25 transition-all duration-200 group-hover:bg-[#FACC15] group-hover:text-[#0A0A0A] dark:text-[#FACC15]">
+          <div
+            className={`flex h-12 w-12 items-center justify-center rounded-xl ring-1 transition-all duration-200 ${
+              tool.icon === "pdf-excel"
+                ? "bg-[#217346]/15 text-[#217346] ring-[#217346]/30 group-hover:bg-[#217346] group-hover:text-white dark:bg-emerald-500/15 dark:text-emerald-400 dark:ring-emerald-500/30"
+                : "bg-[#FACC15]/12 text-[#CA8A04] ring-[#FACC15]/25 group-hover:bg-[#FACC15] group-hover:text-[#0A0A0A] dark:text-[#FACC15]"
+            }`}
+          >
             <ToolIcon name={tool.icon} className="h-6 w-6" />
           </div>
 

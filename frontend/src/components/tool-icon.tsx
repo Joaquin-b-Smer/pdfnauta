@@ -10,7 +10,7 @@ import {
   Stamp,
   Lock,
   FileText,
-  FileType,
+  FileSpreadsheet,
   Minimize2,
 } from "lucide-react";
 import type { ToolIconName } from "@/lib/tools";
@@ -39,8 +39,8 @@ export function ToolIcon({
       return <Lock className={className} />;
     case "pdf-word":
       return <FileText className={className} />;
-    case "word-pdf":
-      return <FileType className={className} />;
+    case "pdf-excel":
+      return <FileSpreadsheet className={className} />;
     case "compress":
       return <Minimize2 className={className} />;
   }
