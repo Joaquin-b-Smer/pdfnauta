@@ -130,6 +130,9 @@
     "privacyTitle": "Complete privacy (100% on your device):",
     "privacyText": "every tool runs directly inside your browser or phone. Your PDF files are never uploaded or stored on any server.",
     "feedbackButton": "Send feedback or report a bug",
+    "whatsNewButton": "What's new?",
+    "whatsNewTitle": "What's new in PDFNauta?",
+    "whatsNewSubtitle": "Release notes and improvements in the current version.",
     "copyrightSuffix": "— PDFNauta (100% Local • Free forever).",
     "bottomBadges": "No sign-up • No watermarks • Serverless"
   },

@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LanguageToggle } from "@/components/language-toggle";
 import { useLanguage } from "@/context/language-context";
+import { APP_VERSION } from "@/config/version";
 
 export function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -31,11 +32,14 @@ export function Navbar() {
             <Compass className="h-5 w-5 stroke-[2.4]" />
           </div>
           <div className="flex flex-col leading-none">
-            <div className="flex items-baseline gap-1.5">
+            <div className="flex items-center gap-1.5">
               <span className="text-lg font-extrabold tracking-tight text-foreground sm:text-xl">
                 PDF<span className="text-[#EAB308] dark:text-[#FACC15]">Nauta</span>
               </span>
-              <span className="text-xs font-semibold text-muted-foreground">
+              <span className="inline-flex items-center rounded-full border border-purple-400/40 bg-purple-400/15 px-2 py-0.5 text-[10px] font-bold leading-none text-purple-700 dark:border-purple-300/35 dark:bg-purple-400/20 dark:text-purple-200 sm:text-[11px]">
+                {APP_VERSION}
+              </span>
+              <span className="hidden text-xs font-semibold text-muted-foreground xs:inline sm:inline">
                 by <span className="text-foreground">JoApps</span>
               </span>
             </div>

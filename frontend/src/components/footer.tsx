@@ -10,11 +10,18 @@ import {
   Compass,
   Loader2,
   Mail,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/card";
 import { PDF_TOOLS } from "@/lib/tools";
 import { useLanguage } from "@/context/language-context";
+import {
+  APP_RELEASE_DATE,
+  APP_VERSION,
+  APP_VERSION_STATUS,
+  CHANGELOG,
+} from "@/config/version";
 
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 const WEB3FORMS_ACCESS_KEY =
@@ -23,8 +30,9 @@ const WEB3FORMS_ACCESS_KEY =
 const FALLBACK_EMAIL = "jbs.microapps@gmail.com";
 
 export function Footer() {
-  const { t } = useLanguage();
-  const [open, setOpen] = React.useState(false);
+  const { language, t } = useLanguage();
+  const [openFeedback, setOpenFeedback] = React.useState(false);
+  const [openWhatsNew, setOpenWhatsNew] = React.useState(false);
 
   return (
     <>
@@ -55,11 +63,20 @@ export function Footer() {
               </div>
             </div>
 
-            <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+            <div className="flex flex-wrap items-center gap-2.5">
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => setOpen(true)}
+                onClick={() => setOpenWhatsNew(true)}
+                className="border-purple-400/40 hover:border-purple-400 hover:bg-purple-400/10"
+              >
+                <Sparkles className="h-4 w-4 text-purple-600 dark:text-purple-300" />
+                {t.footer.whatsNewButton}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setOpenFeedback(true)}
                 className="border-[#FACC15]/40 hover:border-[#FACC15] hover:bg-[#FACC15]/10"
               >
                 <MessageSquarePlus className="h-4 w-4 text-[#EAB308] dark:text-[#FACC15]" />
@@ -75,11 +92,112 @@ export function Footer() {
             </p>
             <p>{t.footer.bottomBadges}</p>
           </div>
+
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-border/50 pt-4 text-[11px] text-muted-foreground">
+            <p className="font-medium text-foreground/85">
+              PDFNauta{" "}
+              <span className="font-bold text-purple-700 dark:text-purple-300">
+                {APP_VERSION}
+              </span>{" "}
+              - {APP_VERSION_STATUS[language]} • {APP_RELEASE_DATE}
+            </p>
+            <button
+              type="button"
+              onClick={() => setOpenWhatsNew(true)}
+              className="font-semibold text-purple-700 underline-offset-4 hover:underline dark:text-purple-300"
+            >
+              {t.footer.whatsNewButton}
+            </button>
+          </div>
         </div>
       </footer>
 
-      {open && <FeedbackModal onClose={() => setOpen(false)} />}
+      {openWhatsNew && <WhatsNewModal onClose={() => setOpenWhatsNew(false)} />}
+      {openFeedback && <FeedbackModal onClose={() => setOpenFeedback(false)} />}
     </>
+  );
+}
+
+function WhatsNewModal({ onClose }: { onClose: () => void }) {
+  const { language, t } = useLanguage();
+
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="whats-new-modal-title"
+      onClick={onClose}
+    >
+      <div
+        className="w-full max-w-lg animate-fade-up rounded-2xl border border-border bg-card p-6 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between gap-4">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <h2
+                id="whats-new-modal-title"
+                className="text-lg font-bold text-foreground"
+              >
+                {t.footer.whatsNewTitle}
+              </h2>
+              <span className="inline-flex items-center rounded-full border border-purple-400/40 bg-purple-400/15 px-2 py-0.5 text-[11px] font-bold text-purple-700 dark:border-purple-300/35 dark:bg-purple-400/20 dark:text-purple-200">
+                {APP_VERSION}
+              </span>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {t.footer.whatsNewSubtitle}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label={t.feedbackModal.closeAria}
+            className="rounded-lg p-1.5 text-muted-foreground hover:bg-secondary hover:text-foreground"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        <ul className="mt-5 space-y-3">
+          {CHANGELOG.map((entry) => (
+            <li
+              key={entry.version}
+              className="rounded-xl border border-purple-400/25 bg-purple-400/[0.06] p-4"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="inline-flex items-center gap-1.5 text-sm font-extrabold text-purple-700 dark:text-purple-300">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  {entry.version}
+                </span>
+                <span className="text-[11px] font-medium text-muted-foreground">
+                  {entry.date}
+                </span>
+              </div>
+              <p className="mt-2 text-sm leading-relaxed text-foreground/90">
+                <strong className="font-bold">{entry.version}</strong> -{" "}
+                {entry.summary[language]}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-6 flex justify-end">
+          <Button type="button" onClick={onClose}>
+            {t.feedbackModal.closeButton}
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 }
 

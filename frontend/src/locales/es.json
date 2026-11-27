@@ -130,6 +130,9 @@
     "privacyTitle": "Privacidad absoluta (100% en tu dispositivo):",
     "privacyText": "todas las herramientas se ejecutan directamente en tu navegador o celular. Tus archivos PDF nunca se suben ni se guardan en ningún servidor.",
     "feedbackButton": "Enviar comentarios o reportar error",
+    "whatsNewButton": "¿Qué hay de nuevo?",
+    "whatsNewTitle": "¿Qué hay de nuevo en PDFNauta?",
+    "whatsNewSubtitle": "Historial de mejoras y novedades de la versión actual.",
     "copyrightSuffix": "— PDFNauta (100% Local • Gratis para siempre).",
     "bottomBadges": "Sin registro • Sin marcas de agua • Sin servidores"
   },
