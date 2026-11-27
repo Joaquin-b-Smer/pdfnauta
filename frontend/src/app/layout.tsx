@@ -4,12 +4,6 @@ import { Providers } from "@/components/providers";
 import { Navbar, BetaNoticeBanner } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 
-const jakarta = { variable: "" };
-const inter = { variable: "" };
-const dancing = { variable: "" };
-const vibes = { variable: "" };
-const caveat = { variable: "" };
-
 export const metadata: Metadata = {
   title: "PDFNauta by JoApps — Suite PDF Rápida, Privada y Gratuita",
   description:
@@ -23,9 +17,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body
-        className={`${jakarta.variable} ${inter.variable} ${dancing.variable} ${vibes.variable} ${caveat.variable} min-h-screen font-sans`}
-      >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Caveat:wght@600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-screen font-sans">
         <Providers>
           <div className="flex min-h-screen flex-col">
             <Navbar />
