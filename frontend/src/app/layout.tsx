@@ -1,44 +1,14 @@
 import type { Metadata } from "next";
-import {
-  Plus_Jakarta_Sans,
-  Inter,
-  Dancing_Script,
-  Great_Vibes,
-  Caveat,
-} from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { Navbar, BetaNoticeBanner } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-jakarta",
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const dancing = Dancing_Script({
-  subsets: ["latin"],
-  variable: "--font-dancing",
-  weight: ["600", "700"],
-});
-
-const vibes = Great_Vibes({
-  subsets: ["latin"],
-  variable: "--font-vibes",
-  weight: ["400"],
-});
-
-const caveat = Caveat({
-  subsets: ["latin"],
-  variable: "--font-caveat",
-  weight: ["600", "700"],
-});
+const jakarta = { variable: "" };
+const inter = { variable: "" };
+const dancing = { variable: "" };
+const vibes = { variable: "" };
+const caveat = { variable: "" };
 
 export const metadata: Metadata = {
   title: "PDFNauta by JoApps — Suite PDF Rápida, Privada y Gratuita",
